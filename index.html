@@ -7,9 +7,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-/* ============================================================
-   DESIGN SYSTEM — CSS Custom Properties
-   ============================================================ */
 :root {
   --bg-primary: #0f1117;
   --bg-surface: #1a1d27;
@@ -27,240 +24,86 @@
   --radius: 8px;
   --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
 }
-
-/* ============================================================
-   RESET & BASE
-   ============================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--text-primary);
-  background: var(--bg-primary);
-  overflow-x: hidden;
+  font-size: 13px; line-height: 1.5;
+  color: var(--text-primary); background: var(--bg-primary); overflow-x: hidden;
 }
-
 a { color: var(--accent-blue); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-/* ============================================================
-   LAYOUT
-   ============================================================ */
 .app { display: flex; min-height: 100vh; }
-
 .sidebar {
-  width: var(--sidebar-width);
-  background: var(--bg-surface);
-  border-right: 1px solid var(--border);
-  position: fixed;
-  top: 0; left: 0; bottom: 0;
-  display: flex;
-  flex-direction: column;
-  z-index: 100;
-  overflow-y: auto;
+  width: var(--sidebar-width); background: var(--bg-surface);
+  border-right: 1px solid var(--border); position: fixed;
+  top: 0; left: 0; bottom: 0; display: flex; flex-direction: column;
+  z-index: 100; overflow-y: auto;
 }
+.main { margin-left: var(--sidebar-width); flex: 1; padding: 28px 32px; min-height: 100vh; }
 
-.main {
-  margin-left: var(--sidebar-width);
-  flex: 1;
-  padding: 28px 32px;
-  min-height: 100vh;
-}
-
-/* ============================================================
-   SIDEBAR
-   ============================================================ */
 .sidebar-logo {
-  padding: 20px 16px 16px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  padding: 20px 16px 16px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
 }
 .sidebar-logo .monogram {
-  width: 36px; height: 36px;
-  background: var(--accent-blue);
-  border-radius: 8px;
+  width: 36px; height: 36px; background: var(--accent-blue); border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
   font-weight: 700; font-size: 15px; color: #fff;
 }
-.sidebar-logo .logo-text {
-  font-size: 11px; color: var(--text-secondary); line-height: 1.3;
-}
-.sidebar-logo .logo-text strong {
-  display: block; font-size: 13px; color: var(--text-primary);
-}
-
-.sidebar-section {
-  padding: 16px 0 4px;
-}
+.sidebar-logo .logo-text { font-size: 11px; color: var(--text-secondary); line-height: 1.3; }
+.sidebar-logo .logo-text strong { display: block; font-size: 13px; color: var(--text-primary); }
+.sidebar-section { padding: 16px 0 4px; }
 .sidebar-section-label {
-  padding: 0 16px 8px;
-  font-size: 10px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--text-muted);
+  padding: 0 16px 8px; font-size: 10px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);
 }
-
 .sidebar-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  cursor: pointer;
-  color: var(--text-secondary);
-  font-size: 13px;
-  transition: background 0.15s, color 0.15s;
-  border-left: 3px solid transparent;
+  display: flex; align-items: center; gap: 8px; padding: 8px 16px;
+  cursor: pointer; color: var(--text-secondary); font-size: 13px;
+  transition: background 0.15s, color 0.15s; border-left: 3px solid transparent;
 }
-.sidebar-item:hover {
-  background: rgba(79, 142, 247, 0.06);
-  color: var(--text-primary);
-}
-.sidebar-item.active {
-  background: rgba(79, 142, 247, 0.1);
-  color: var(--accent-blue);
-  border-left-color: var(--accent-blue);
-}
+.sidebar-item:hover { background: rgba(79,142,247,0.06); color: var(--text-primary); }
+.sidebar-item.active { background: rgba(79,142,247,0.1); color: var(--accent-blue); border-left-color: var(--accent-blue); }
+.sidebar-account-item { justify-content: space-between; }
+.sidebar-account-left { display: flex; align-items: center; gap: 8px; }
+.sidebar-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.sidebar-score { font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 4px; background: rgba(255,255,255,0.06); }
+.sidebar-footer { margin-top: auto; padding: 16px; border-top: 1px solid var(--border); font-size: 10px; color: var(--text-muted); line-height: 1.5; }
 
-.sidebar-account-item {
-  justify-content: space-between;
-}
-.sidebar-account-left {
-  display: flex; align-items: center; gap: 8px;
-}
-.sidebar-dot {
-  width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
-}
-.sidebar-score {
-  font-size: 11px; font-weight: 600; padding: 2px 6px;
-  border-radius: 4px; background: rgba(255,255,255,0.06);
-}
-
-.sidebar-footer {
-  margin-top: auto;
-  padding: 16px;
-  border-top: 1px solid var(--border);
-  font-size: 10px;
-  color: var(--text-muted);
-  line-height: 1.5;
-}
-
-/* Mobile nav */
 .mobile-nav {
-  display: none;
-  background: var(--bg-surface);
-  border-bottom: 1px solid var(--border);
-  padding: 10px 16px;
-  align-items: center;
-  justify-content: space-between;
+  display: none; background: var(--bg-surface); border-bottom: 1px solid var(--border);
+  padding: 10px 16px; align-items: center; justify-content: space-between;
   position: sticky; top: 0; z-index: 100;
 }
-.mobile-nav .monogram {
-  width: 30px; height: 30px;
-  background: var(--accent-blue);
-  border-radius: 6px;
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 700; font-size: 12px; color: #fff;
-}
-.mobile-nav select {
-  background: var(--bg-card); color: var(--text-primary);
-  border: 1px solid var(--border); border-radius: 6px;
-  padding: 6px 10px; font-size: 12px; font-family: inherit;
-}
+.mobile-nav .monogram { width: 30px; height: 30px; background: var(--accent-blue); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; color: #fff; }
+.mobile-nav select { background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px; font-size: 12px; font-family: inherit; }
 
-/* ============================================================
-   CARDS & COMPONENTS
-   ============================================================ */
-.card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 20px;
-}
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; }
+.kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+.kpi-card { padding: 16px 18px; position: relative; }
+.kpi-card .kpi-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: flex; align-items: center; gap: 4px; }
+.kpi-card .kpi-value { font-size: 24px; font-weight: 700; color: var(--text-primary); }
+.kpi-card .kpi-sub { font-size: 11px; color: var(--text-secondary); margin-top: 4px; }
+.view-header { margin-bottom: 24px; }
+.view-header h1 { font-size: 20px; font-weight: 700; color: var(--text-primary); }
+.view-header .subtitle { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
 
-.kpi-strip {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-bottom: 24px;
+.context-banner {
+  background: rgba(79,142,247,0.06); border: 1px solid rgba(79,142,247,0.15);
+  border-radius: var(--radius); padding: 10px 16px; margin-bottom: 20px;
+  font-size: 12px; color: var(--text-secondary); line-height: 1.5;
 }
-.kpi-card {
-  padding: 16px 18px;
-  position: relative;
-}
-.kpi-card .kpi-label {
-  font-size: 11px; color: var(--text-muted); text-transform: uppercase;
-  letter-spacing: 0.5px; margin-bottom: 6px;
-  display: flex; align-items: center; gap: 4px;
-}
-.kpi-card .kpi-value {
-  font-size: 24px; font-weight: 700; color: var(--text-primary);
-}
-.kpi-card .kpi-sub {
-  font-size: 11px; color: var(--text-secondary); margin-top: 4px;
-}
+.context-banner strong { color: var(--accent-blue); }
 
-.view-header {
-  margin-bottom: 24px;
-}
-.view-header h1 {
-  font-size: 20px; font-weight: 700; color: var(--text-primary);
-}
-.view-header .subtitle {
-  font-size: 12px; color: var(--text-secondary); margin-top: 2px;
-}
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table th { text-align: left; padding: 10px 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); border-bottom: 1px solid var(--border); white-space: nowrap; }
+.data-table td { padding: 12px; border-bottom: 1px solid rgba(46,51,71,0.5); color: var(--text-secondary); vertical-align: middle; }
+.data-table tbody tr { transition: background 0.12s; }
+.data-table tbody tr:hover { background: rgba(79,142,247,0.04); }
+.data-table .row-risk-left { border-left: 3px solid var(--accent-red); }
 
-/* ============================================================
-   TABLES
-   ============================================================ */
-.data-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
-}
-.data-table th {
-  text-align: left;
-  padding: 10px 12px;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--text-muted);
-  border-bottom: 1px solid var(--border);
-  white-space: nowrap;
-}
-.data-table td {
-  padding: 12px;
-  border-bottom: 1px solid rgba(46, 51, 71, 0.5);
-  color: var(--text-secondary);
-  vertical-align: middle;
-}
-.data-table tbody tr {
-  transition: background 0.12s;
-}
-.data-table tbody tr:hover {
-  background: rgba(79, 142, 247, 0.04);
-}
-.data-table .row-risk-left {
-  border-left: 3px solid var(--accent-red);
-}
-
-/* ============================================================
-   BADGES
-   ============================================================ */
-.badge {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: 500;
-  white-space: nowrap;
-}
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; white-space: nowrap; }
 .badge-green { background: rgba(46,204,138,0.12); color: var(--accent-green); }
 .badge-yellow { background: rgba(245,166,35,0.12); color: var(--accent-yellow); }
 .badge-red { background: rgba(224,82,82,0.12); color: var(--accent-red); }
@@ -268,332 +111,91 @@ a:hover { text-decoration: underline; }
 .badge-purple { background: rgba(155,114,245,0.12); color: var(--accent-purple); }
 .badge-muted { background: rgba(85,93,122,0.15); color: var(--text-muted); }
 
-.score-num {
-  font-weight: 700;
-  font-size: 14px;
-}
-.score-bar {
-  width: 60px; height: 6px;
-  background: rgba(255,255,255,0.06);
-  border-radius: 3px;
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 8px;
-  overflow: hidden;
-}
-.score-bar-fill {
-  height: 100%;
-  border-radius: 3px;
-  transition: width 0.6s ease-out;
-}
-
+.score-num { font-weight: 700; font-size: 14px; }
+.score-bar { width: 60px; height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; display: inline-block; vertical-align: middle; margin-left: 8px; overflow: hidden; }
+.score-bar-fill { height: 100%; border-radius: 3px; transition: width 0.6s ease-out; }
 .trend-up { color: var(--accent-green); }
 .trend-down { color: var(--accent-red); }
 .trend-stable { color: var(--text-muted); }
 
-/* ============================================================
-   CHARTS
-   ============================================================ */
-.chart-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-.chart-container {
-  position: relative;
-  max-height: 280px;
-}
+.chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+.chart-container { position: relative; max-height: 280px; }
 
-/* ============================================================
-   TABS
-   ============================================================ */
-.tab-bar {
-  display: flex;
-  gap: 0;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 24px;
-}
-.tab-btn {
-  padding: 10px 20px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-muted);
-  cursor: pointer;
-  border: none;
-  background: none;
-  border-bottom: 2px solid transparent;
-  transition: color 0.15s, border-color 0.15s;
-  font-family: inherit;
-}
+.tab-bar { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
+.tab-btn { padding: 10px 20px; font-size: 13px; font-weight: 500; color: var(--text-muted); cursor: pointer; border: none; background: none; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; font-family: inherit; }
 .tab-btn:hover { color: var(--text-secondary); }
-.tab-btn.active {
-  color: var(--accent-blue);
-  border-bottom-color: var(--accent-blue);
-}
+.tab-btn.active { color: var(--accent-blue); border-bottom-color: var(--accent-blue); }
 
-/* ============================================================
-   ALERTS
-   ============================================================ */
 .alert-feed { margin-bottom: 24px; }
-.alert-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 10px 14px;
-  border-bottom: 1px solid rgba(46,51,71,0.4);
-  font-size: 12px;
-}
+.alert-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; border-bottom: 1px solid rgba(46,51,71,0.4); font-size: 12px; }
 .alert-item:last-child { border-bottom: none; }
-.alert-type-badge {
-  font-size: 10px;
-  font-weight: 600;
-  text-transform: uppercase;
-  padding: 2px 6px;
-  border-radius: 3px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.alert-account {
-  font-weight: 600;
-  color: var(--text-primary);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
+.alert-type-badge { font-size: 10px; font-weight: 600; text-transform: uppercase; padding: 2px 6px; border-radius: 3px; white-space: nowrap; flex-shrink: 0; }
+.alert-account { font-weight: 600; color: var(--text-primary); white-space: nowrap; flex-shrink: 0; }
 .alert-msg { color: var(--text-secondary); }
 .alert-time { color: var(--text-muted); margin-left: auto; white-space: nowrap; flex-shrink: 0; font-size: 11px; }
 
-/* ============================================================
-   SOURCE TOOLTIPS
-   ============================================================ */
-.source-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 14px; height: 14px;
-  font-size: 9px;
-  font-weight: 600;
-  color: var(--text-muted);
-  border: 1px solid var(--text-muted);
-  border-radius: 50%;
-  cursor: help;
-  position: relative;
-  vertical-align: middle;
-  margin-left: 4px;
-  flex-shrink: 0;
-}
+.source-icon { display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; font-size: 9px; font-weight: 600; color: var(--text-muted); border: 1px solid var(--text-muted); border-radius: 50%; cursor: help; position: relative; vertical-align: middle; margin-left: 4px; flex-shrink: 0; }
 .source-icon:hover { color: var(--accent-blue); border-color: var(--accent-blue); }
-.source-icon .source-tooltip {
-  display: none;
-  position: absolute;
-  bottom: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 10px 12px;
-  font-size: 11px;
-  font-weight: 400;
-  color: var(--text-secondary);
-  width: 280px;
-  line-height: 1.5;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-  z-index: 1000;
-  white-space: normal;
-  text-align: left;
-}
-.source-icon .source-tooltip strong {
-  color: var(--text-primary); display: block; margin-bottom: 2px;
-}
-.source-icon .source-tooltip a {
-  color: var(--accent-blue); font-size: 10px; word-break: break-all;
-}
+.source-icon .source-tooltip { display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: var(--bg-surface); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; font-size: 11px; font-weight: 400; color: var(--text-secondary); width: 280px; line-height: 1.5; box-shadow: 0 4px 12px rgba(0,0,0,0.4); z-index: 1000; white-space: normal; text-align: left; }
+.source-icon .source-tooltip strong { color: var(--text-primary); display: block; margin-bottom: 2px; }
+.source-icon .source-tooltip a { color: var(--accent-blue); font-size: 10px; word-break: break-all; }
 .source-icon:hover .source-tooltip { display: block; }
 
-/* ============================================================
-   SOURCES PANEL
-   ============================================================ */
-.sources-panel {
-  margin-top: 32px;
-  border-top: 1px solid var(--border);
-  padding-top: 16px;
-}
-.sources-toggle {
-  background: none; border: none; color: var(--text-muted);
-  font-size: 11px; cursor: pointer; font-family: inherit;
-  display: flex; align-items: center; gap: 6px;
-  padding: 4px 0;
-}
+.sources-panel { margin-top: 32px; border-top: 1px solid var(--border); padding-top: 16px; }
+.sources-toggle { background: none; border: none; color: var(--text-muted); font-size: 11px; cursor: pointer; font-family: inherit; display: flex; align-items: center; gap: 6px; padding: 4px 0; }
 .sources-toggle:hover { color: var(--text-secondary); }
-.sources-content {
-  display: none;
-  margin-top: 12px;
-  font-size: 11px;
-  color: var(--text-muted);
-  line-height: 1.8;
-}
+.sources-content { display: none; margin-top: 12px; font-size: 11px; color: var(--text-muted); line-height: 1.8; }
 .sources-content.open { display: block; }
-.sources-content li {
-  margin-left: 16px;
-  margin-bottom: 4px;
-}
+.sources-content li { margin-left: 16px; margin-bottom: 4px; }
 .sources-content a { color: var(--accent-blue); }
-.sources-content .disclaimer {
-  margin-top: 12px;
-  padding: 8px 12px;
-  background: rgba(245,166,35,0.06);
-  border-left: 3px solid var(--accent-yellow);
-  border-radius: 0 4px 4px 0;
-  color: var(--text-secondary);
-}
+.sources-content .disclaimer { margin-top: 12px; padding: 8px 12px; background: rgba(245,166,35,0.06); border-left: 3px solid var(--accent-yellow); border-radius: 0 4px 4px 0; color: var(--text-secondary); }
 
-/* ============================================================
-   QBR SPECIFIC
-   ============================================================ */
-.exec-summary {
-  background: rgba(79,142,247,0.05);
-  border-left: 3px solid var(--accent-blue);
-  padding: 16px 20px;
-  border-radius: 0 var(--radius) var(--radius) 0;
-  font-size: 13px;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  margin-bottom: 24px;
-}
-
-.qbr-section-title {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 14px;
-  margin-top: 28px;
-}
+.exec-summary { background: rgba(79,142,247,0.05); border-left: 3px solid var(--accent-blue); padding: 16px 20px; border-radius: 0 var(--radius) var(--radius) 0; font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px; }
+.qbr-section-title { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 14px; margin-top: 28px; }
 .qbr-section-title:first-child { margin-top: 0; }
-
-.expansion-card {
-  padding: 16px;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-}
-.expansion-card .exp-module {
-  font-weight: 600; color: var(--text-primary); font-size: 14px;
-  margin-bottom: 4px;
-}
-.expansion-card .exp-rationale {
-  font-size: 12px; color: var(--text-secondary); margin-top: 6px; line-height: 1.6;
-}
-.expansion-card .exp-badges {
-  display: flex; gap: 8px; margin-top: 4px;
-}
-.btn {
-  display: inline-block;
-  padding: 6px 14px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  border: 1px solid var(--border);
-  background: var(--bg-surface);
-  color: var(--text-secondary);
-  font-family: inherit;
-  transition: background 0.12s, color 0.12s;
-}
+.expansion-card { padding: 16px; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 16px; }
+.expansion-card .exp-module { font-weight: 600; color: var(--text-primary); font-size: 14px; margin-bottom: 4px; }
+.expansion-card .exp-rationale { font-size: 12px; color: var(--text-secondary); margin-top: 6px; line-height: 1.6; }
+.expansion-card .exp-badges { display: flex; gap: 8px; margin-top: 4px; }
+.btn { display: inline-block; padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: var(--bg-surface); color: var(--text-secondary); font-family: inherit; transition: background 0.12s, color 0.12s; }
 .btn:hover { background: var(--bg-card); color: var(--text-primary); }
-.btn-primary {
-  background: var(--accent-blue);
-  color: #fff;
-  border-color: var(--accent-blue);
-}
+.btn-primary { background: var(--accent-blue); color: #fff; border-color: var(--accent-blue); }
 .btn-primary:hover { background: #3d7ae5; }
 
-/* Edit mode toggle */
-.edit-toggle {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 12px; color: var(--text-secondary);
-}
-.edit-toggle input[type="checkbox"] {
-  accent-color: var(--accent-blue);
-}
-.editable-cell {
-  background: transparent;
-  border: 1px solid transparent;
-  color: var(--text-secondary);
-  font-family: inherit;
-  font-size: 13px;
-  padding: 4px 6px;
-  border-radius: 4px;
-  width: 80px;
-  text-align: center;
-}
-.editable-cell.editing {
-  border-color: var(--accent-blue);
-  background: rgba(79,142,247,0.08);
-  color: var(--text-primary);
-}
+.edit-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-secondary); }
+.edit-toggle input[type="checkbox"] { accent-color: var(--accent-blue); }
+.editable-cell { background: transparent; border: 1px solid transparent; color: var(--text-secondary); font-family: inherit; font-size: 13px; padding: 4px 6px; border-radius: 4px; width: 80px; text-align: center; }
+.editable-cell.editing { border-color: var(--accent-blue); background: rgba(79,142,247,0.08); color: var(--text-primary); }
 
-/* ============================================================
-   EMPTY STATE
-   ============================================================ */
-.empty-state {
-  text-align: center;
-  padding: 48px 24px;
-  color: var(--text-muted);
-  font-size: 14px;
-}
+.empty-state { text-align: center; padding: 48px 24px; color: var(--text-muted); font-size: 14px; }
+.health-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 20px; margin-bottom: 24px; }
+.account-header-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; align-items: center; }
+.account-big-score { font-size: 48px; font-weight: 700; line-height: 1; }
+.account-header-row { display: flex; justify-content: space-between; align-items: flex-start; }
+.adoption-cell { padding: 4px 8px; border-radius: 4px; font-weight: 600; text-align: center; min-width: 50px; display: inline-block; }
 
-/* ============================================================
-   HEALTH DETAIL LAYOUT
-   ============================================================ */
-.health-grid {
-  display: grid;
-  grid-template-columns: 3fr 2fr;
-  gap: 20px;
-  margin-bottom: 24px;
-}
+/* Expandable health rows */
+.dim-row { cursor: pointer; }
+.dim-row:hover { background: rgba(79,142,247,0.06); }
+.dim-row td:first-child { font-weight: 600; color: var(--text-primary); }
+.dim-toggle { font-size: 10px; margin-right: 6px; display: inline-block; transition: transform 0.15s; }
+.dim-toggle.open { transform: rotate(90deg); }
+.metric-row td { padding: 8px 12px 8px 36px; font-size: 12px; border-bottom: 1px solid rgba(46,51,71,0.3); }
+.metric-row td:first-child { color: var(--text-muted); font-weight: 400; }
+.total-row { border-top: 2px solid var(--border); }
+.total-row td { font-weight: 700; font-size: 14px; padding-top: 14px; }
 
-/* Account detail header badges */
-.account-header-badges {
-  display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; align-items: center;
+.methodology-box {
+  margin-top: 16px; padding: 14px 16px; background: rgba(79,142,247,0.04);
+  border: 1px solid rgba(79,142,247,0.1); border-radius: var(--radius);
+  font-size: 11px; color: var(--text-secondary); line-height: 1.7;
 }
-.account-big-score {
-  font-size: 48px;
-  font-weight: 700;
-  line-height: 1;
-}
-.account-header-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
+.methodology-box strong { color: var(--text-primary); }
+.methodology-toggle { background: none; border: none; color: var(--text-muted); font-size: 11px; cursor: pointer; font-family: inherit; padding: 4px 0; }
+.methodology-toggle:hover { color: var(--text-secondary); }
 
-/* Adoption heatmap cell */
-.adoption-cell {
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-weight: 600;
-  text-align: center;
-  min-width: 50px;
-  display: inline-block;
-}
+.page-footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 10px; color: var(--text-muted); text-align: center; }
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
-.page-footer {
-  margin-top: 48px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
-  font-size: 10px;
-  color: var(--text-muted);
-  text-align: center;
-}
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
 @media (max-width: 768px) {
   .sidebar { display: none; }
   .mobile-nav { display: flex; }
@@ -603,12 +205,8 @@ a:hover { text-decoration: underline; }
   .health-grid { grid-template-columns: 1fr; }
   .account-header-row { flex-direction: column; gap: 12px; }
 }
-
-/* ============================================================
-   PRINT
-   ============================================================ */
 @media print {
-  .sidebar, .mobile-nav, .edit-toggle, .source-icon, .sources-panel, .btn { display: none !important; }
+  .sidebar, .mobile-nav, .edit-toggle, .source-icon, .sources-panel, .btn, .context-banner { display: none !important; }
   .main { margin-left: 0; padding: 20px; }
   body { background: #fff; color: #111; font-size: 11px; }
   .card { border: 1px solid #ddd; box-shadow: none; background: #fafafa; }
@@ -621,7 +219,6 @@ a:hover { text-decoration: underline; }
 </head>
 <body>
 
-<!-- Mobile Nav (visible < 768px) -->
 <div class="mobile-nav">
   <div class="monogram">HV</div>
   <select id="mobile-nav-select" onchange="handleMobileNav(this.value)">
@@ -630,34 +227,32 @@ a:hover { text-decoration: underline; }
     <option value="account:bajaj-finance">Bajaj Finance</option>
     <option value="account:slice-fintech">Slice (Fintech)</option>
     <option value="account:hdfc-ergo">HDFC Ergo</option>
-    <option value="qbr">QBR Builder</option>
+    <option value="qbr">QBR Builder — SBI Cards</option>
   </select>
 </div>
 
 <div class="app">
-  <!-- Sidebar -->
   <aside class="sidebar" id="sidebar"></aside>
-
-  <!-- Main Content -->
   <main class="main" id="main-content"></main>
 </div>
 
 <script>
 /* ==============================================================
-   DATA MODEL
+   DATA MODEL — Metric-backed health scores
+   Based on Gainsight, ChurnZero, Vitally best practices
    ============================================================== */
 const ACCOUNTS = [
   {
     id: "sbi-cards",
     name: "SBI Cards",
     segment: "Tier-1 Bank",
-    csm: "Harsh Vardhan",
+    csm: "Harsh Ashok",
     tier: "Strategic",
     arr: "₹2.4 Cr",
     arrNum: 24000000,
     contractEnd: "Mar 2026",
     daysToRenewal: 47,
-    overallScore: 71,
+    overallScore: 72,
     trend: "declining",
     riskFlag: "renewal-risk",
     modules: {
@@ -669,11 +264,51 @@ const ACCOUNTS = [
       "AML Screening": { adoptionPct: 23, apiCallsMonthly: 8000, errorRate: 4.2, benchmark: 60 }
     },
     healthDimensions: {
-      adoption: { score: 68, weight: 30 },
-      engagement: { score: 74, weight: 20 },
-      outcomes: { score: 81, weight: 25 },
-      support: { score: 55, weight: 15 },
-      financial: { score: 70, weight: 10 }
+      "Product Usage": {
+        weight: 30, score: 71,
+        metrics: [
+          { name: "API Volume vs Expected", value: "461K / 500K mo", score: 92 },
+          { name: "Feature Adoption (≥60% usage)", value: "4 of 6 modules", score: 67 },
+          { name: "Avg. API Error Rate", value: "2.3%", score: 54 },
+          { name: "SDK Version Currency", value: "v3.2 (1 behind)", score: 70 }
+        ]
+      },
+      "Engagement": {
+        weight: 25, score: 80,
+        metrics: [
+          { name: "Exec Sponsor Status", value: "Active (CDO)", score: 100 },
+          { name: "QBR Attendance (Last 4)", value: "3 of 4", score: 75 },
+          { name: "Days Since Last Contact", value: "8 days", score: 75 },
+          { name: "Champion Count", value: "2 contacts", score: 70 }
+        ]
+      },
+      "Outcomes": {
+        weight: 20, score: 80,
+        metrics: [
+          { name: "KYC Pass-through Rate", value: "84%", score: 84 },
+          { name: "Onboarding TAT Improvement", value: "50% reduction", score: 78 },
+          { name: "False Positive Rate (AML)", value: "8.4%", score: 58 },
+          { name: "Compliance Audit Status", value: "Passed", score: 100 }
+        ]
+      },
+      "Support Health": {
+        weight: 15, score: 59,
+        metrics: [
+          { name: "Open Tickets / Month", value: "31", score: 45 },
+          { name: "Avg. Resolution Time", value: "18 hours", score: 75 },
+          { name: "CSAT Score", value: "3.2 / 5", score: 64 },
+          { name: "Escalations (Last 90d)", value: "1", score: 70 }
+        ]
+      },
+      "Commercial": {
+        weight: 10, score: 84,
+        metrics: [
+          { name: "Days to Renewal", value: "47 days", score: 50 },
+          { name: "Expansion Pipeline", value: "₹46L (2 opps)", score: 100 },
+          { name: "Invoice Status", value: "Current", score: 100 },
+          { name: "License Utilization", value: "85%", score: 85 }
+        ]
+      }
     },
     qbr: {
       period: "Q3 FY25",
@@ -693,7 +328,7 @@ const ACCOUNTS = [
       nextSteps: [
         { action: "Android SDK v3.4 upgrade", owner: "HyperVerge Eng", due: "Feb 15", status: "In Progress" },
         { action: "AML Full Suite pilot", owner: "SBI Cards IT + HV CSM", due: "Mar 1", status: "Planned" },
-        { action: "EBR with CISO & CDO", owner: "Harsh Vardhan", due: "Jan 31", status: "Scheduled" },
+        { action: "EBR with CISO & CDO", owner: "Harsh Ashok", due: "Jan 31", status: "Scheduled" },
         { action: "Video KYC drop-off RCA", owner: "HyperVerge Product", due: "Jan 20", status: "In Progress" },
         { action: "Fraud Signal API demo", owner: "HV Solutions", due: "Feb 28", status: "Planned" }
       ]
@@ -708,13 +343,13 @@ const ACCOUNTS = [
     id: "bajaj-finance",
     name: "Bajaj Finance",
     segment: "Large NBFC",
-    csm: "Harsh Vardhan",
+    csm: "Harsh Ashok",
     tier: "Strategic",
     arr: "₹1.8 Cr",
     arrNum: 18000000,
     contractEnd: "Sep 2026",
     daysToRenewal: 183,
-    overallScore: 84,
+    overallScore: 85,
     trend: "stable",
     riskFlag: null,
     modules: {
@@ -726,11 +361,51 @@ const ACCOUNTS = [
       "AML Screening": { adoptionPct: 62, apiCallsMonthly: 45000, errorRate: 2.1, benchmark: 60 }
     },
     healthDimensions: {
-      adoption: { score: 85, weight: 30 },
-      engagement: { score: 88, weight: 20 },
-      outcomes: { score: 91, weight: 25 },
-      support: { score: 79, weight: 15 },
-      financial: { score: 82, weight: 10 }
+      "Product Usage": {
+        weight: 30, score: 91,
+        metrics: [
+          { name: "API Volume vs Expected", value: "880K / 550K mo", score: 100 },
+          { name: "Feature Adoption (≥60% usage)", value: "5 of 6 modules", score: 83 },
+          { name: "Avg. API Error Rate", value: "0.9%", score: 82 },
+          { name: "SDK Version Currency", value: "v3.4 (latest)", score: 100 }
+        ]
+      },
+      "Engagement": {
+        weight: 25, score: 100,
+        metrics: [
+          { name: "Exec Sponsor Status", value: "Active (VP Digital)", score: 100 },
+          { name: "QBR Attendance (Last 4)", value: "4 of 4", score: 100 },
+          { name: "Days Since Last Contact", value: "3 days", score: 100 },
+          { name: "Champion Count", value: "3 contacts", score: 100 }
+        ]
+      },
+      "Outcomes": {
+        weight: 20, score: 89,
+        metrics: [
+          { name: "KYC Pass-through Rate", value: "92%", score: 92 },
+          { name: "Onboarding TAT Improvement", value: "65% reduction", score: 88 },
+          { name: "False Positive Rate (AML)", value: "3.2%", score: 74 },
+          { name: "Compliance Audit Status", value: "Passed", score: 100 }
+        ]
+      },
+      "Support Health": {
+        weight: 15, score: 89,
+        metrics: [
+          { name: "Open Tickets / Month", value: "18", score: 70 },
+          { name: "Avg. Resolution Time", value: "8 hours", score: 100 },
+          { name: "CSAT Score", value: "4.2 / 5", score: 84 },
+          { name: "Escalations (Last 90d)", value: "0", score: 100 }
+        ]
+      },
+      "Commercial": {
+        weight: 10, score: 98,
+        metrics: [
+          { name: "Days to Renewal", value: "183 days", score: 100 },
+          { name: "Expansion Pipeline", value: "₹57L (2 opps)", score: 100 },
+          { name: "Invoice Status", value: "Current", score: 100 },
+          { name: "License Utilization", value: "92%", score: 92 }
+        ]
+      }
     },
     qbr: null,
     expansionOpportunities: [
@@ -746,13 +421,13 @@ const ACCOUNTS = [
     id: "slice-fintech",
     name: "Slice (Fintech)",
     segment: "Digital Fintech",
-    csm: "Harsh Vardhan",
+    csm: "Harsh Ashok",
     tier: "Growth",
     arr: "₹72L",
     arrNum: 7200000,
     contractEnd: "Dec 2025",
     daysToRenewal: -28,
-    overallScore: 58,
+    overallScore: 42,
     trend: "declining",
     riskFlag: "churn-risk",
     modules: {
@@ -764,11 +439,51 @@ const ACCOUNTS = [
       "AML Screening": { adoptionPct: 11, apiCallsMonthly: 3000, errorRate: 6.1, benchmark: 60 }
     },
     healthDimensions: {
-      adoption: { score: 52, weight: 30 },
-      engagement: { score: 48, weight: 20 },
-      outcomes: { score: 61, weight: 25 },
-      support: { score: 44, weight: 15 },
-      financial: { score: 65, weight: 10 }
+      "Product Usage": {
+        weight: 30, score: 38,
+        metrics: [
+          { name: "API Volume vs Expected", value: "215K / 350K mo", score: 61 },
+          { name: "Feature Adoption (≥60% usage)", value: "2 of 6 modules", score: 33 },
+          { name: "Avg. API Error Rate", value: "3.6%", score: 28 },
+          { name: "SDK Version Currency", value: "v3.0 (2 behind)", score: 30 }
+        ]
+      },
+      "Engagement": {
+        weight: 25, score: 34,
+        metrics: [
+          { name: "Exec Sponsor Status", value: "None (CTO departed Oct)", score: 20 },
+          { name: "QBR Attendance (Last 4)", value: "1 of 4", score: 25 },
+          { name: "Days Since Last Contact", value: "22 days", score: 50 },
+          { name: "Champion Count", value: "1 contact", score: 40 }
+        ]
+      },
+      "Outcomes": {
+        weight: 20, score: 50,
+        metrics: [
+          { name: "KYC Pass-through Rate", value: "68%", score: 68 },
+          { name: "Onboarding TAT Improvement", value: "20% reduction", score: 40 },
+          { name: "False Positive Rate (AML)", value: "14%", score: 30 },
+          { name: "Compliance Audit Status", value: "Pending", score: 60 }
+        ]
+      },
+      "Support Health": {
+        weight: 15, score: 45,
+        metrics: [
+          { name: "Open Tickets / Month", value: "42", score: 45 },
+          { name: "Avg. Resolution Time", value: "32 hours", score: 50 },
+          { name: "CSAT Score", value: "2.8 / 5", score: 56 },
+          { name: "Escalations (Last 90d)", value: "3", score: 30 }
+        ]
+      },
+      "Commercial": {
+        weight: 10, score: 36,
+        metrics: [
+          { name: "Days to Renewal", value: "Overdue (28d)", score: 10 },
+          { name: "Expansion Pipeline", value: "None", score: 30 },
+          { name: "Invoice Status", value: "30 days late", score: 50 },
+          { name: "License Utilization", value: "55%", score: 55 }
+        ]
+      }
     },
     qbr: null,
     expansionOpportunities: [],
@@ -782,13 +497,13 @@ const ACCOUNTS = [
     id: "hdfc-ergo",
     name: "HDFC Ergo",
     segment: "Insurance",
-    csm: "Harsh Vardhan",
+    csm: "Harsh Ashok",
     tier: "Enterprise",
     arr: "₹1.1 Cr",
     arrNum: 11000000,
     contractEnd: "Jun 2026",
     daysToRenewal: 152,
-    overallScore: 77,
+    overallScore: 79,
     trend: "improving",
     riskFlag: null,
     modules: {
@@ -800,11 +515,51 @@ const ACCOUNTS = [
       "AML Screening": { adoptionPct: 45, apiCallsMonthly: 21000, errorRate: 2.8, benchmark: 60 }
     },
     healthDimensions: {
-      adoption: { score: 72, weight: 30 },
-      engagement: { score: 81, weight: 20 },
-      outcomes: { score: 84, weight: 25 },
-      support: { score: 76, weight: 15 },
-      financial: { score: 78, weight: 10 }
+      "Product Usage": {
+        weight: 30, score: 76,
+        metrics: [
+          { name: "API Volume vs Expected", value: "351K / 400K mo", score: 88 },
+          { name: "Feature Adoption (≥60% usage)", value: "4 of 6 modules", score: 67 },
+          { name: "Avg. API Error Rate", value: "1.7%", score: 66 },
+          { name: "SDK Version Currency", value: "v3.4 (latest)", score: 100 }
+        ]
+      },
+      "Engagement": {
+        weight: 25, score: 76,
+        metrics: [
+          { name: "Exec Sponsor Status", value: "New (building)", score: 60 },
+          { name: "QBR Attendance (Last 4)", value: "3 of 4", score: 75 },
+          { name: "Days Since Last Contact", value: "5 days", score: 100 },
+          { name: "Champion Count", value: "2 contacts", score: 70 }
+        ]
+      },
+      "Outcomes": {
+        weight: 20, score: 81,
+        metrics: [
+          { name: "KYC Pass-through Rate", value: "88%", score: 88 },
+          { name: "Onboarding TAT Improvement", value: "40% reduction", score: 70 },
+          { name: "False Positive Rate (AML)", value: "5.1%", score: 65 },
+          { name: "Compliance Audit Status", value: "Passed", score: 100 }
+        ]
+      },
+      "Support Health": {
+        weight: 15, score: 80,
+        metrics: [
+          { name: "Open Tickets / Month", value: "22", score: 70 },
+          { name: "Avg. Resolution Time", value: "14 hours", score: 75 },
+          { name: "CSAT Score", value: "3.8 / 5", score: 76 },
+          { name: "Escalations (Last 90d)", value: "0", score: 100 }
+        ]
+      },
+      "Commercial": {
+        weight: 10, score: 88,
+        metrics: [
+          { name: "Days to Renewal", value: "152 days", score: 75 },
+          { name: "Expansion Pipeline", value: "₹19L (1 opp)", score: 100 },
+          { name: "Invoice Status", value: "Current", score: 100 },
+          { name: "License Utilization", value: "78%", score: 78 }
+        ]
+      }
     },
     qbr: null,
     expansionOpportunities: [
@@ -817,94 +572,21 @@ const ACCOUNTS = [
   }
 ];
 
-/* ==============================================================
-   SOURCES & ASSUMPTIONS DATABASE
-   ============================================================== */
 const SOURCES = {
-  tat: {
-    title: "KYC Turnaround Time",
-    text: "SBI partnership with HyperVerge reduced video KYC flow from ~25 min manual checks to ~5 min digital.",
-    url: "https://affairscloud.com/sbi-tie-up-with-hyperverge-for-onboarding-customer-online-under-covid-19/",
-    pub: "AffairsCloud"
-  },
-  agentProductivity: {
-    title: "Agent Productivity",
-    text: "SBI × HyperVerge partnership aimed at 10x improvement in video KYC checks per agent per day.",
-    url: "https://timesofindia.indiatimes.com/state-bank-of-india-and-hyperverge-ramp-up-technology-for-online-customer-onboarding-amidst-covid-19-economic-recovery/articleshow/82792933.cms",
-    pub: "Times of India"
-  },
-  passThrough: {
-    title: "Pass-through Rates",
-    text: "HyperVerge claims pass-through rates up to 95% with reduced drop-offs in digital KYC journeys.",
-    url: "https://hyperverge.co/solutions/digitial-identity-verification-kyc/",
-    pub: "HyperVerge"
-  },
-  nist: {
-    title: "NIST FRVT Rankings",
-    text: "HyperVerge ranks top-10 globally on NIST FRVT 1:1 and 1:N, top in India and SEA.",
-    url: "https://www.businesswireindia.com/hyperverge-tops-the-nist-rankings-in-both-frvt-11-and-1n-categories-79018.html",
-    pub: "BusinessWire India"
-  },
-  accuracy: {
-    title: "AI Accuracy & Scale",
-    text: "99.5%+ AI accuracy across 1B+ identities verified. Optimized for low-bandwidth, low-end devices.",
-    url: "https://hyperverge.co/in/",
-    pub: "HyperVerge"
-  },
-  liveness: {
-    title: "Liveness Detection",
-    text: "iBeta-certified passive liveness — single selfie, no active gestures required.",
-    url: "https://hyperverge.co/in/integrations-marketplace/face-match-api/",
-    pub: "HyperVerge"
-  },
-  vCip: {
-    title: "RBI V-CIP Guidelines",
-    text: "Video-based Customer Identification Process (V-CIP) guidelines by RBI for remote KYC.",
-    url: "https://hyperverge.co/blog/what-is-video-kyc/",
-    pub: "HyperVerge / RBI"
-  },
-  lowBandwidth: {
-    title: "Low-Bandwidth Optimization",
-    text: "HyperVerge SDK optimized for 2G networks and low-end devices across emerging markets.",
-    url: "https://aws.amazon.com/marketplace/seller-profile?id=seller-i4eneb6nbt2iq",
-    pub: "AWS Marketplace"
-  },
-  aml: {
-    title: "AML/PEP Screening",
-    text: "End-to-end AML screening, PEP checks, and watchlist monitoring as part of HyperVerge ONE.",
-    url: "https://hyperverge.co/in/industries/bank-customer-onboarding/",
-    pub: "HyperVerge"
-  },
-  benchmarks: {
-    title: "Module Adoption Benchmarks",
-    text: "Benchmarks are illustrative, derived from HyperVerge's published case studies and BFSI industry norms for digital KYC adoption.",
-    url: "https://hyperverge.co/in/",
-    pub: "Illustrative (HyperVerge case studies)"
-  },
-  healthModel: {
-    title: "Health Score Model",
-    text: "Weighted health score model based on standard CSM frameworks (Gainsight, Vitally, ChurnZero). Weights and dimensions are illustrative.",
-    url: null,
-    pub: "Industry standard CSM practice"
-  },
-  arrData: {
-    title: "ARR Figures",
-    text: "All ARR figures are illustrative and do not represent actual HyperVerge contract values. Designed to reflect typical BFSI SaaS deal sizes.",
-    url: null,
-    pub: "Illustrative"
-  },
-  sbiPartnership: {
-    title: "SBI × HyperVerge Partnership",
-    text: "SBI partnered with HyperVerge for digital onboarding during COVID-19 recovery, enabling Video KYC at scale.",
-    url: "https://timesofindia.indiatimes.com/state-bank-of-india-and-hyperverge-ramp-up-technology-for-online-customer-onboarding-amidst-covid-19-economic-recovery/articleshow/82792933.cms",
-    pub: "Times of India"
-  },
-  conversion: {
-    title: "Conversion & Drop-off Metrics",
-    text: "eKYC completion rates and drop-off figures are illustrative, inspired by HyperVerge's published claim of 95% pass-through and reduced drop-offs.",
-    url: "https://hyperverge.co/solutions/digitial-identity-verification-kyc/",
-    pub: "HyperVerge"
-  }
+  tat: { title: "KYC Turnaround Time", text: "SBI partnership with HyperVerge reduced video KYC flow from ~25 min manual checks to ~5 min digital.", url: "https://affairscloud.com/sbi-tie-up-with-hyperverge-for-onboarding-customer-online-under-covid-19/", pub: "AffairsCloud" },
+  agentProductivity: { title: "Agent Productivity", text: "SBI × HyperVerge partnership aimed at 10x improvement in video KYC checks per agent per day.", url: "https://timesofindia.indiatimes.com/state-bank-of-india-and-hyperverge-ramp-up-technology-for-online-customer-onboarding-amidst-covid-19-economic-recovery/articleshow/82792933.cms", pub: "Times of India" },
+  passThrough: { title: "Pass-through Rates", text: "HyperVerge claims pass-through rates up to 95% with reduced drop-offs in digital KYC journeys.", url: "https://hyperverge.co/solutions/digitial-identity-verification-kyc/", pub: "HyperVerge" },
+  nist: { title: "NIST FRVT Rankings", text: "HyperVerge ranks top-10 globally on NIST FRVT 1:1 and 1:N, top in India and SEA.", url: "https://www.businesswireindia.com/hyperverge-tops-the-nist-rankings-in-both-frvt-11-and-1n-categories-79018.html", pub: "BusinessWire India" },
+  accuracy: { title: "AI Accuracy & Scale", text: "99.5%+ AI accuracy across 1B+ identities verified. Optimized for low-bandwidth, low-end devices.", url: "https://hyperverge.co/in/", pub: "HyperVerge" },
+  liveness: { title: "Liveness Detection", text: "iBeta-certified passive liveness — single selfie, no active gestures required.", url: "https://hyperverge.co/in/integrations-marketplace/face-match-api/", pub: "HyperVerge" },
+  vCip: { title: "RBI V-CIP Guidelines", text: "Video-based Customer Identification Process (V-CIP) guidelines by RBI for remote KYC.", url: "https://hyperverge.co/blog/what-is-video-kyc/", pub: "HyperVerge / RBI" },
+  lowBandwidth: { title: "Low-Bandwidth Optimization", text: "HyperVerge SDK optimized for 2G networks and low-end devices across emerging markets.", url: "https://aws.amazon.com/marketplace/seller-profile?id=seller-i4eneb6nbt2iq", pub: "AWS Marketplace" },
+  aml: { title: "AML/PEP Screening", text: "End-to-end AML screening, PEP checks, and watchlist monitoring as part of HyperVerge ONE.", url: "https://hyperverge.co/in/industries/bank-customer-onboarding/", pub: "HyperVerge" },
+  benchmarks: { title: "Module Adoption Benchmarks", text: "Benchmarks are illustrative, derived from HyperVerge's published case studies and BFSI industry norms for digital KYC adoption.", url: "https://hyperverge.co/in/", pub: "Illustrative (HyperVerge case studies)" },
+  healthModel: { title: "Health Score Model", text: "5-dimension weighted model (Product Usage 30%, Engagement 25%, Outcomes 20%, Support 15%, Commercial 10%). Each dimension scored from 2-4 observable metrics. Inspired by Gainsight, ChurnZero, and Vitally frameworks.", url: null, pub: "Industry standard CSM practice" },
+  arrData: { title: "ARR Figures", text: "All ARR figures are illustrative and do not represent actual HyperVerge contract values. Designed to reflect typical BFSI SaaS deal sizes.", url: null, pub: "Illustrative" },
+  sbiPartnership: { title: "SBI × HyperVerge Partnership", text: "SBI partnered with HyperVerge for digital onboarding during COVID-19 recovery, enabling Video KYC at scale.", url: "https://timesofindia.indiatimes.com/state-bank-of-india-and-hyperverge-ramp-up-technology-for-online-customer-onboarding-amidst-covid-19-economic-recovery/articleshow/82792933.cms", pub: "Times of India" },
+  conversion: { title: "Conversion & Drop-off Metrics", text: "eKYC completion rates and drop-off figures are illustrative, inspired by HyperVerge's published claim of 95% pass-through and reduced drop-offs.", url: "https://hyperverge.co/solutions/digitial-identity-verification-kyc/", pub: "HyperVerge" }
 };
 
 /* ==============================================================
@@ -917,239 +599,103 @@ function computeHealthScore(account) {
   }
   return Math.round(score);
 }
-
-function getScoreColor(score) {
-  if (score >= 80) return 'var(--accent-green)';
-  if (score >= 60) return 'var(--accent-yellow)';
-  return 'var(--accent-red)';
-}
-
-function getScoreBadgeClass(score) {
-  if (score >= 80) return 'badge-green';
-  if (score >= 60) return 'badge-yellow';
-  return 'badge-red';
-}
-
-function getScoreLabel(score) {
-  if (score >= 80) return 'Healthy';
-  if (score >= 60) return 'Needs Attention';
-  return 'At Risk';
-}
-
-function trendIcon(trend) {
-  if (trend === 'improving') return '<span class="trend-up">↑ Improving</span>';
-  if (trend === 'declining') return '<span class="trend-down">↓ Declining</span>';
-  return '<span class="trend-stable">→ Stable</span>';
-}
-
-function riskBadge(flag) {
-  if (flag === 'churn-risk') return '<span class="badge badge-red">Churn Risk</span>';
-  if (flag === 'renewal-risk') return '<span class="badge badge-yellow">Renewal Risk</span>';
-  return '<span class="badge badge-muted">—</span>';
-}
-
-function alertTypeBadge(type) {
-  const map = {
-    critical: ['CRITICAL', 'badge-red'],
-    risk: ['RISK', 'badge-yellow'],
-    opportunity: ['OPPORTUNITY', 'badge-green'],
-    info: ['INFO', 'badge-blue']
-  };
-  const [label, cls] = map[type] || ['INFO', 'badge-blue'];
-  return `<span class="alert-type-badge badge ${cls}">${label}</span>`;
-}
-
-function statusBadge(status) {
-  const map = {
-    'on-track': ['On Track', 'badge-green'],
-    'at-risk': ['At Risk', 'badge-yellow'],
-    'behind': ['Behind', 'badge-red'],
-    'In Progress': ['In Progress', 'badge-blue'],
-    'Planned': ['Planned', 'badge-muted'],
-    'Scheduled': ['Scheduled', 'badge-purple']
-  };
-  const [label, cls] = map[status] || [status, 'badge-muted'];
-  return `<span class="badge ${cls}">${label}</span>`;
-}
-
-function fmtNum(n) {
-  return n.toLocaleString('en-IN');
-}
-
-function sourceIcon(key) {
-  const s = SOURCES[key];
-  if (!s) return '';
-  const urlLine = s.url ? `<a href="${s.url}" target="_blank">${s.pub}</a>` : `<em>${s.pub}</em>`;
-  return `<span class="source-icon" aria-label="Source info">ⓘ<span class="source-tooltip"><strong>${s.title}</strong>${s.text}<br>${urlLine}</span></span>`;
-}
-
-function adoptionCellColor(pct) {
-  if (pct >= 80) return 'rgba(46,204,138,0.15)';
-  if (pct >= 60) return 'rgba(245,166,35,0.12)';
-  return 'rgba(224,82,82,0.15)';
-}
-
-function errorColor(rate) {
-  if (rate < 1.5) return 'var(--accent-green)';
-  if (rate <= 3) return 'var(--accent-yellow)';
-  return 'var(--accent-red)';
-}
-
-function moduleStatus(adoptionPct, benchmark) {
-  const delta = adoptionPct - benchmark;
-  if (delta >= 0) return '<span class="badge badge-green">Healthy</span>';
-  if (delta >= -15) return '<span class="badge badge-yellow">Needs Attention</span>';
-  return '<span class="badge badge-red">Critical</span>';
-}
+function getScoreColor(s) { return s >= 80 ? 'var(--accent-green)' : s >= 60 ? 'var(--accent-yellow)' : 'var(--accent-red)'; }
+function getScoreBadgeClass(s) { return s >= 80 ? 'badge-green' : s >= 60 ? 'badge-yellow' : 'badge-red'; }
+function getScoreLabel(s) { return s >= 80 ? 'Healthy' : s >= 60 ? 'Needs Attention' : 'At Risk'; }
+function metricStatus(s) { return s >= 75 ? '<span style="color:var(--accent-green)">✓</span>' : s >= 50 ? '<span style="color:var(--accent-yellow)">⚠</span>' : '<span style="color:var(--accent-red)">✗</span>'; }
+function dimStatus(s) { return s >= 75 ? '<span style="color:var(--accent-green)">✓ Above</span>' : s >= 50 ? '<span style="color:var(--accent-yellow)">⚠ Near</span>' : '<span style="color:var(--accent-red)">✗ Below</span>'; }
+function trendIcon(t) { return t === 'improving' ? '<span class="trend-up">↑ Improving</span>' : t === 'declining' ? '<span class="trend-down">↓ Declining</span>' : '<span class="trend-stable">→ Stable</span>'; }
+function riskBadge(f) { return f === 'churn-risk' ? '<span class="badge badge-red">Churn Risk</span>' : f === 'renewal-risk' ? '<span class="badge badge-yellow">Renewal Risk</span>' : '<span class="badge badge-muted">—</span>'; }
+function alertTypeBadge(type) { const m = { critical: ['CRITICAL','badge-red'], risk: ['RISK','badge-yellow'], opportunity: ['OPPORTUNITY','badge-green'], info: ['INFO','badge-blue'] }; const [l,c] = m[type]||['INFO','badge-blue']; return `<span class="alert-type-badge badge ${c}">${l}</span>`; }
+function statusBadge(status) { const m = { 'on-track':['On Track','badge-green'], 'at-risk':['At Risk','badge-yellow'], 'behind':['Behind','badge-red'], 'In Progress':['In Progress','badge-blue'], 'Planned':['Planned','badge-muted'], 'Scheduled':['Scheduled','badge-purple'] }; const [l,c] = m[status]||[status,'badge-muted']; return `<span class="badge ${c}">${l}</span>`; }
+function fmtNum(n) { return n.toLocaleString('en-IN'); }
+function sourceIcon(key) { const s = SOURCES[key]; if (!s) return ''; const u = s.url ? `<a href="${s.url}" target="_blank">${s.pub}</a>` : `<em>${s.pub}</em>`; return `<span class="source-icon" aria-label="Source info">ⓘ<span class="source-tooltip"><strong>${s.title}</strong>${s.text}<br>${u}</span></span>`; }
+function adoptionCellColor(p) { return p >= 80 ? 'rgba(46,204,138,0.15)' : p >= 60 ? 'rgba(245,166,35,0.12)' : 'rgba(224,82,82,0.15)'; }
+function errorColor(r) { return r < 1.5 ? 'var(--accent-green)' : r <= 3 ? 'var(--accent-yellow)' : 'var(--accent-red)'; }
+function moduleStatus(a, b) { const d = a - b; return d >= 0 ? '<span class="badge badge-green">Healthy</span>' : d >= -15 ? '<span class="badge badge-yellow">Needs Attention</span>' : '<span class="badge badge-red">Critical</span>'; }
 
 function sourcesPanel() {
-  return `
-    <div class="sources-panel">
-      <button class="sources-toggle" onclick="this.nextElementSibling.classList.toggle('open')">
-        ▸ Assumptions &amp; Sources
-      </button>
-      <div class="sources-content">
-        <ul>
-          ${Object.values(SOURCES).map(s => `
-            <li><strong>${s.title}:</strong> ${s.text}
-              ${s.url ? ` — <a href="${s.url}" target="_blank">${s.pub}</a>` : ` — <em>${s.pub}</em>`}
-            </li>
-          `).join('')}
-        </ul>
-        <div class="disclaimer">
-          <strong>Disclaimer:</strong> All data in this dashboard is illustrative, built from publicly available information to demonstrate how a CSM would structure account health, ROI narratives, and expansion plans for HyperVerge's BFSI vertical. No proprietary or confidential data has been used.
-        </div>
-      </div>
-    </div>`;
+  return `<div class="sources-panel"><button class="sources-toggle" onclick="this.nextElementSibling.classList.toggle('open')">▸ Assumptions &amp; Sources</button><div class="sources-content"><ul>${Object.values(SOURCES).map(s => `<li><strong>${s.title}:</strong> ${s.text}${s.url ? ` — <a href="${s.url}" target="_blank">${s.pub}</a>` : ` — <em>${s.pub}</em>`}</li>`).join('')}</ul><div class="disclaimer"><strong>Disclaimer:</strong> All data in this dashboard is illustrative, built from publicly available information to demonstrate how a CSM would structure account health, ROI narratives, and expansion plans for HyperVerge's BFSI vertical. No proprietary or confidential data has been used.</div></div></div>`;
 }
+
+const FOOTER = '<div class="page-footer">Built by Harsh Ashok · CSM Applicant · HyperVerge BFSI Vertical · Data is illustrative</div>';
 
 /* ==============================================================
    CHART MANAGEMENT
    ============================================================== */
 const chartInstances = {};
+function destroyCharts() { Object.keys(chartInstances).forEach(k => { if (chartInstances[k]) { chartInstances[k].destroy(); delete chartInstances[k]; } }); }
+function createChart(id, cfg) { const c = document.getElementById(id); if (!c) return; chartInstances[id] = new Chart(c, cfg); }
 
-function destroyCharts() {
-  Object.keys(chartInstances).forEach(key => {
-    if (chartInstances[key]) {
-      chartInstances[key].destroy();
-      delete chartInstances[key];
-    }
-  });
-}
-
-function createChart(canvasId, config) {
-  const ctx = document.getElementById(canvasId);
-  if (!ctx) return;
-  chartInstances[canvasId] = new Chart(ctx, config);
-}
-
-/* ==============================================================
-   ANIMATION — Score counter
-   ============================================================== */
 function animateScores() {
   document.querySelectorAll('[data-animate-score]').forEach(el => {
     const target = parseInt(el.getAttribute('data-animate-score'));
-    const duration = 400;
-    const start = performance.now();
-    function step(now) {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(target * eased);
-      if (progress < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
+    const dur = 400, start = performance.now();
+    (function step(now) {
+      const p = Math.min((now - start) / dur, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(step);
+    })(start);
   });
 }
 
 /* ==============================================================
    ROUTER / STATE
    ============================================================== */
-let currentView = 'overview';
-let currentAccountId = null;
-let currentTab = 0;
+let currentView = 'overview', currentAccountId = null, currentTab = 0;
+const expandedDims = {};
 
 function navigate(view, accountId, tab) {
-  currentView = view;
-  currentAccountId = accountId || null;
-  currentTab = tab || 0;
-  destroyCharts();
-  updateSidebar();
-  renderMainContent();
-  animateScores();
+  currentView = view; currentAccountId = accountId || null; currentTab = tab || 0;
+  destroyCharts(); updateSidebar(); renderMainContent(); animateScores();
 }
-
 function handleMobileNav(val) {
   if (val === 'overview') navigate('overview');
   else if (val === 'qbr') navigate('qbr');
   else if (val.startsWith('account:')) navigate('account', val.split(':')[1]);
 }
 
-/* ==============================================================
-   SIDEBAR RENDER
-   ============================================================== */
-function updateSidebar() {
-  const sb = document.getElementById('sidebar');
-  sb.innerHTML = `
-    <div class="sidebar-logo">
-      <div class="monogram">HV</div>
-      <div class="logo-text">
-        <strong>HyperVerge</strong>
-        BFSI Portfolio
-      </div>
-    </div>
-
-    <div class="sidebar-section">
-      <div class="sidebar-section-label">Portfolio</div>
-      <div class="sidebar-item ${currentView === 'overview' ? 'active' : ''}" onclick="navigate('overview')">
-        ◫ Overview
-      </div>
-    </div>
-
-    <div class="sidebar-section">
-      <div class="sidebar-section-label">Accounts</div>
-      ${ACCOUNTS.map(a => {
-        const dotColor = a.riskFlag === 'churn-risk' ? 'var(--accent-red)' :
-                         a.riskFlag === 'renewal-risk' ? 'var(--accent-yellow)' :
-                         a.overallScore >= 80 ? 'var(--accent-green)' : 'var(--accent-yellow)';
-        const isActive = currentView === 'account' && currentAccountId === a.id;
-        return `<div class="sidebar-item sidebar-account-item ${isActive ? 'active' : ''}" onclick="navigate('account','${a.id}')">
-          <span class="sidebar-account-left">
-            <span class="sidebar-dot" style="background:${dotColor}"></span>
-            ${a.name}
-          </span>
-          <span class="sidebar-score" style="color:${getScoreColor(a.overallScore)}">${a.overallScore}</span>
-        </div>`;
-      }).join('')}
-    </div>
-
-    <div class="sidebar-section">
-      <div class="sidebar-section-label">Tools</div>
-      <div class="sidebar-item ${currentView === 'qbr' ? 'active' : ''}" onclick="navigate('qbr')">
-        ▤ QBR Builder
-      </div>
-    </div>
-
-    <div class="sidebar-footer">
-      CSM: Harsh Vardhan · HyperVerge
-    </div>
-  `;
+function toggleDim(dimKey) {
+  expandedDims[dimKey] = !expandedDims[dimKey];
+  // Re-render just the health tab content
+  const container = document.getElementById('health-table-container');
+  if (container) {
+    const a = ACCOUNTS.find(x => x.id === currentAccountId);
+    if (a) container.innerHTML = renderHealthTableInner(a);
+  }
 }
 
 /* ==============================================================
-   MAIN CONTENT ROUTER
+   SIDEBAR
    ============================================================== */
+function updateSidebar() {
+  document.getElementById('sidebar').innerHTML = `
+    <div class="sidebar-logo"><div class="monogram">HV</div><div class="logo-text"><strong>HyperVerge</strong>BFSI Portfolio</div></div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-label">Portfolio</div>
+      <div class="sidebar-item ${currentView==='overview'?'active':''}" onclick="navigate('overview')">◫ Overview</div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-label">Sample Accounts</div>
+      ${ACCOUNTS.map(a => {
+        const dot = a.riskFlag==='churn-risk' ? 'var(--accent-red)' : a.riskFlag==='renewal-risk' ? 'var(--accent-yellow)' : a.overallScore>=80 ? 'var(--accent-green)' : 'var(--accent-yellow)';
+        const act = currentView==='account' && currentAccountId===a.id;
+        return `<div class="sidebar-item sidebar-account-item ${act?'active':''}" onclick="navigate('account','${a.id}')"><span class="sidebar-account-left"><span class="sidebar-dot" style="background:${dot}"></span>${a.name}</span><span class="sidebar-score" style="color:${getScoreColor(a.overallScore)}">${a.overallScore}</span></div>`;
+      }).join('')}
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-label">Tools</div>
+      <div class="sidebar-item ${currentView==='qbr'?'active':''}" onclick="navigate('qbr')">▤ QBR Builder — SBI Cards</div>
+    </div>
+    <div class="sidebar-footer">Harsh Ashok · CSM Applicant · HyperVerge</div>`;
+}
+
 function renderMainContent() {
   const main = document.getElementById('main-content');
   if (currentView === 'overview') main.innerHTML = renderOverview();
   else if (currentView === 'account') main.innerHTML = renderAccountDetail();
   else if (currentView === 'qbr') main.innerHTML = renderQBR();
-
-  // Post-render: init charts
-  requestAnimationFrame(() => {
-    if (currentView === 'overview') initOverviewCharts();
-    else if (currentView === 'account') initAccountCharts();
-  });
+  requestAnimationFrame(() => { if (currentView === 'overview') initOverviewCharts(); else if (currentView === 'account') initAccountCharts(); });
 }
 
 /* ==============================================================
@@ -1157,181 +703,42 @@ function renderMainContent() {
    ============================================================== */
 function renderOverview() {
   const totalArr = '₹6.22 Cr';
-  const avgScore = Math.round(ACCOUNTS.reduce((s, a) => s + a.overallScore, 0) / ACCOUNTS.length * 10) / 10;
-  const atRiskArr = '₹72L';
-  const expansionPipeline = '₹1.22 Cr';
+  const avgScore = Math.round(ACCOUNTS.reduce((s,a) => s + a.overallScore, 0) / ACCOUNTS.length * 10) / 10;
 
-  // Collect all alerts
   const allAlerts = [];
-  ACCOUNTS.forEach(a => a.alerts.forEach(al => allAlerts.push({ ...al, account: a.name })));
-  // Sort: critical first, then risk, opportunity, info
-  const alertOrder = { critical: 0, risk: 1, opportunity: 2, info: 3 };
-  allAlerts.sort((a, b) => (alertOrder[a.type] || 3) - (alertOrder[b.type] || 3));
+  ACCOUNTS.forEach(a => a.alerts.forEach(al => allAlerts.push({...al, account: a.name})));
+  const alertOrder = {critical:0, risk:1, opportunity:2, info:3};
+  allAlerts.sort((a,b) => (alertOrder[a.type]||3) - (alertOrder[b.type]||3));
 
-  // Sort accounts: churn first, then renewal-risk, then by days to renewal
-  const sorted = [...ACCOUNTS].sort((a, b) => {
-    const riskOrder = { 'churn-risk': 0, 'renewal-risk': 1 };
-    const ra = riskOrder[a.riskFlag] ?? 2;
-    const rb = riskOrder[b.riskFlag] ?? 2;
-    if (ra !== rb) return ra - rb;
-    return a.daysToRenewal - b.daysToRenewal;
+  const sorted = [...ACCOUNTS].sort((a,b) => {
+    const ro = {'churn-risk':0,'renewal-risk':1};
+    const ra = ro[a.riskFlag]??2, rb = ro[b.riskFlag]??2;
+    return ra !== rb ? ra - rb : a.daysToRenewal - b.daysToRenewal;
   });
 
   return `
-    <div class="view-header">
-      <h1>BFSI Account Portfolio</h1>
-      <div class="subtitle">4 accounts · ${totalArr} ARR · Jan 2025</div>
-    </div>
-
-    <!-- KPI Strip -->
+    <div class="context-banner"><strong>Portfolio Artifact</strong> — Speculative dashboard built from public information to demonstrate how I'd run HyperVerge's BFSI accounts as a CSM.<br><span style="color:var(--text-muted)">Start here → Click an account → Open QBR Builder for an example executive review</span></div>
+    <div class="view-header"><h1>BFSI Account Portfolio</h1><div class="subtitle">4 accounts · ${totalArr} ARR · Jan 2025</div></div>
     <div class="kpi-strip">
-      <div class="card kpi-card">
-        <div class="kpi-label">Total ARR ${sourceIcon('arrData')}</div>
-        <div class="kpi-value">${totalArr}</div>
-        <div class="kpi-sub">4 active accounts</div>
-      </div>
-      <div class="card kpi-card">
-        <div class="kpi-label">Avg Health Score ${sourceIcon('healthModel')}</div>
-        <div class="kpi-value"><span data-animate-score="${avgScore}">${avgScore}</span></div>
-        <div class="kpi-sub">${avgScore >= 75 ? '<span class="trend-up">↑</span>' : '<span class="trend-down">↓</span>'} vs benchmark 75</div>
-      </div>
-      <div class="card kpi-card">
-        <div class="kpi-label">At-Risk ARR</div>
-        <div class="kpi-value" style="color:var(--accent-red)">${atRiskArr}</div>
-        <div class="kpi-sub">Slice — contract expired</div>
-      </div>
-      <div class="card kpi-card">
-        <div class="kpi-label">Expansion Pipeline</div>
-        <div class="kpi-value" style="color:var(--accent-green)">${expansionPipeline}</div>
-        <div class="kpi-sub">5 opportunities across 3 accounts</div>
-      </div>
+      <div class="card kpi-card"><div class="kpi-label">Total ARR ${sourceIcon('arrData')}</div><div class="kpi-value">${totalArr}</div><div class="kpi-sub">4 active accounts</div></div>
+      <div class="card kpi-card"><div class="kpi-label">Avg Health Score ${sourceIcon('healthModel')}</div><div class="kpi-value"><span data-animate-score="${avgScore}">${avgScore}</span></div><div class="kpi-sub">${avgScore>=75?'<span class="trend-up">↑</span>':'<span class="trend-down">↓</span>'} vs benchmark 75</div></div>
+      <div class="card kpi-card"><div class="kpi-label">At-Risk ARR</div><div class="kpi-value" style="color:var(--accent-red)">₹72L</div><div class="kpi-sub">Slice — contract expired</div></div>
+      <div class="card kpi-card"><div class="kpi-label">Expansion Pipeline</div><div class="kpi-value" style="color:var(--accent-green)">₹1.22 Cr</div><div class="kpi-sub">5 opportunities across 3 accounts</div></div>
     </div>
-
-    <!-- Account Health Table -->
-    <div class="card" style="margin-bottom:24px; padding:0; overflow-x:auto;">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Account</th><th>Segment</th><th>Tier</th><th>ARR</th>
-            <th>Health Score</th><th>Trend</th><th>Risk Flag</th>
-            <th>Renewal</th><th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${sorted.map(a => {
-            const isRisk = a.riskFlag === 'churn-risk';
-            return `<tr class="${isRisk ? 'row-risk-left' : ''}">
-              <td style="color:var(--text-primary);font-weight:600">${a.name}</td>
-              <td>${a.segment}</td>
-              <td><span class="badge badge-blue">${a.tier}</span></td>
-              <td style="font-weight:600">${a.arr}</td>
-              <td>
-                <span class="score-num" style="color:${getScoreColor(a.overallScore)}" data-animate-score="${a.overallScore}">${a.overallScore}</span>
-                <span class="score-bar"><span class="score-bar-fill" style="width:${a.overallScore}%;background:${getScoreColor(a.overallScore)}"></span></span>
-              </td>
-              <td>${trendIcon(a.trend)}</td>
-              <td>${riskBadge(a.riskFlag)}</td>
-              <td>${a.daysToRenewal < 0 ? '<span style="color:var(--accent-red);font-weight:600">OVERDUE</span>' : a.daysToRenewal + 'd'}</td>
-              <td><a href="#" onclick="event.preventDefault();navigate('account','${a.id}')" style="font-size:12px">View Account →</a></td>
-            </tr>`;
-          }).join('')}
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Charts Row -->
+    <div class="card" style="margin-bottom:24px;padding:0;overflow-x:auto"><table class="data-table"><thead><tr><th>Account</th><th>Segment</th><th>Tier</th><th>ARR</th><th>Health Score</th><th>Trend</th><th>Risk Flag</th><th>Renewal</th><th>Action</th></tr></thead><tbody>
+      ${sorted.map(a => `<tr class="${a.riskFlag==='churn-risk'?'row-risk-left':''}"><td style="color:var(--text-primary);font-weight:600">${a.name}</td><td>${a.segment}</td><td><span class="badge badge-blue">${a.tier}</span></td><td style="font-weight:600">${a.arr}</td><td><span class="score-num" style="color:${getScoreColor(a.overallScore)}" data-animate-score="${a.overallScore}">${a.overallScore}</span><span class="score-bar"><span class="score-bar-fill" style="width:${a.overallScore}%;background:${getScoreColor(a.overallScore)}"></span></span></td><td>${trendIcon(a.trend)}</td><td>${riskBadge(a.riskFlag)}</td><td>${a.daysToRenewal<0?'<span style="color:var(--accent-red);font-weight:600">OVERDUE</span>':a.daysToRenewal+'d'}</td><td><a href="#" onclick="event.preventDefault();navigate('account','${a.id}')" style="font-size:12px">View Account →</a></td></tr>`).join('')}
+    </tbody></table></div>
     <div class="chart-grid">
-      <div class="card">
-        <div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:12px">ARR by Segment</div>
-        <div class="chart-container"><canvas id="chart-arr-segment"></canvas></div>
-      </div>
-      <div class="card">
-        <div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:12px">Health Scores by Account</div>
-        <div class="chart-container"><canvas id="chart-health-bar"></canvas></div>
-      </div>
+      <div class="card"><div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:12px">ARR by Segment</div><div class="chart-container"><canvas id="chart-arr-segment"></canvas></div></div>
+      <div class="card"><div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:12px">Health Scores by Account</div><div class="chart-container"><canvas id="chart-health-bar"></canvas></div></div>
     </div>
-
-    <!-- Alerts Feed -->
-    <div class="card" style="padding:0">
-      <div style="padding:14px 16px 8px;font-size:13px;font-weight:600;color:var(--text-primary);border-bottom:1px solid var(--border)">Active Signals</div>
-      <div class="alert-feed">
-        ${allAlerts.map(al => `
-          <div class="alert-item">
-            ${alertTypeBadge(al.type)}
-            <span class="alert-account">${al.account}</span>
-            <span class="alert-msg">${al.message}</span>
-            <span class="alert-time">${al.time}</span>
-          </div>
-        `).join('')}
-      </div>
-    </div>
-
-    ${sourcesPanel()}
-    <div class="page-footer">Built by Harsh Vardhan · CSM Portfolio · HyperVerge BFSI Vertical · Data is illustrative</div>
-  `;
+    <div class="card" style="padding:0"><div style="padding:14px 16px 8px;font-size:13px;font-weight:600;color:var(--text-primary);border-bottom:1px solid var(--border)">Active Signals</div><div class="alert-feed">${allAlerts.map(al => `<div class="alert-item">${alertTypeBadge(al.type)}<span class="alert-account">${al.account}</span><span class="alert-msg">${al.message}</span><span class="alert-time">${al.time}</span></div>`).join('')}</div></div>
+    ${sourcesPanel()}${FOOTER}`;
 }
 
 function initOverviewCharts() {
-  // ARR Donut
-  createChart('chart-arr-segment', {
-    type: 'doughnut',
-    data: {
-      labels: ['Tier-1 Bank (SBI Cards)', 'Large NBFC (Bajaj Finance)', 'Digital Fintech (Slice)', 'Insurance (HDFC Ergo)'],
-      datasets: [{
-        data: [24000000, 18000000, 7200000, 11000000],
-        backgroundColor: ['#4f8ef7', '#9b72f5', '#e05252', '#2ecc8a'],
-        borderColor: '#21253a',
-        borderWidth: 2
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { position: 'bottom', labels: { color: '#8b91a8', font: { size: 11, family: 'Inter' }, padding: 12 } },
-        tooltip: {
-          callbacks: {
-            label: function(ctx) {
-              const val = ctx.parsed;
-              return ` ₹${(val / 10000000).toFixed(1)} Cr (${Math.round(val / 60200000 * 100)}%)`;
-            }
-          }
-        }
-      },
-      cutout: '65%'
-    }
-  });
-
-  // Health Bar
-  const accounts = ACCOUNTS.map(a => a.name);
-  const scores = ACCOUNTS.map(a => a.overallScore);
-  const colors = scores.map(s => getScoreColor(s).replace('var(--accent-green)', '#2ecc8a').replace('var(--accent-yellow)', '#f5a623').replace('var(--accent-red)', '#e05252'));
-
-  createChart('chart-health-bar', {
-    type: 'bar',
-    data: {
-      labels: accounts,
-      datasets: [{
-        data: scores,
-        backgroundColor: scores.map(s => s >= 80 ? '#2ecc8a' : s >= 60 ? '#f5a623' : '#e05252'),
-        borderRadius: 4,
-        barThickness: 28
-      }]
-    },
-    options: {
-      indexAxis: 'y',
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        x: { min: 0, max: 100, grid: { color: 'rgba(46,51,71,0.5)' }, ticks: { color: '#555d7a', font: { size: 11 } } },
-        y: { grid: { display: false }, ticks: { color: '#8b91a8', font: { size: 12, family: 'Inter' } } }
-      },
-      plugins: {
-        legend: { display: false },
-        annotation: {}
-      }
-    }
-  });
+  createChart('chart-arr-segment', { type:'doughnut', data:{ labels:['Tier-1 Bank (SBI Cards)','Large NBFC (Bajaj Finance)','Digital Fintech (Slice)','Insurance (HDFC Ergo)'], datasets:[{ data:[24000000,18000000,7200000,11000000], backgroundColor:['#4f8ef7','#9b72f5','#e05252','#2ecc8a'], borderColor:'#21253a', borderWidth:2 }] }, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:'bottom', labels:{ color:'#8b91a8', font:{size:11,family:'Inter'}, padding:12 }}, tooltip:{ callbacks:{ label:ctx=>` ₹${(ctx.parsed/10000000).toFixed(1)} Cr (${Math.round(ctx.parsed/60200000*100)}%)` }}}, cutout:'65%' }});
+  createChart('chart-health-bar', { type:'bar', data:{ labels:ACCOUNTS.map(a=>a.name), datasets:[{ data:ACCOUNTS.map(a=>a.overallScore), backgroundColor:ACCOUNTS.map(a=>a.overallScore>=80?'#2ecc8a':a.overallScore>=60?'#f5a623':'#e05252'), borderRadius:4, barThickness:28 }] }, options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, scales:{ x:{min:0,max:100,grid:{color:'rgba(46,51,71,0.5)'},ticks:{color:'#555d7a',font:{size:11}}}, y:{grid:{display:false},ticks:{color:'#8b91a8',font:{size:12,family:'Inter'}}} }, plugins:{ legend:{display:false} }}});
 }
 
 /* ==============================================================
@@ -1340,269 +747,100 @@ function initOverviewCharts() {
 function renderAccountDetail() {
   const a = ACCOUNTS.find(x => x.id === currentAccountId);
   if (!a) return '<div class="empty-state">Account not found</div>';
-
-  const renewalDisplay = a.daysToRenewal < 0
-    ? `<span style="color:var(--accent-red);font-weight:700">OVERDUE (${Math.abs(a.daysToRenewal)}d)</span>`
-    : `${a.daysToRenewal} days`;
-
-  const computedScore = computeHealthScore(a);
-  const lastQScore = a.trend === 'improving' ? computedScore - 4 : a.trend === 'declining' ? computedScore + 3 : computedScore;
-  const delta = computedScore - lastQScore;
-  const deltaStr = delta >= 0 ? `+${delta}` : `${delta}`;
-
-  const tabs = ['Health Overview', 'Module Adoption', 'Expansion'];
-
+  const renewalDisplay = a.daysToRenewal < 0 ? `<span style="color:var(--accent-red);font-weight:700">OVERDUE (${Math.abs(a.daysToRenewal)}d)</span>` : `${a.daysToRenewal} days`;
+  const cs = computeHealthScore(a);
+  const lq = a.trend==='improving' ? cs-4 : a.trend==='declining' ? cs+3 : cs;
+  const d = cs - lq;
+  const tabs = ['Health Overview','Module Adoption','Expansion'];
   return `
-    <div class="view-header">
-      <div class="account-header-row">
-        <div>
-          <h1>${a.name}</h1>
-          <div class="account-header-badges">
-            <span class="badge badge-blue">${a.segment}</span>
-            <span class="badge badge-purple">${a.tier}</span>
-            <span style="color:var(--text-muted);font-size:12px">ARR: <strong style="color:var(--text-primary)">${a.arr}</strong></span>
-            <span style="color:var(--text-muted);font-size:12px">Contract: ${a.contractEnd}</span>
-            <span style="color:var(--text-muted);font-size:12px">Renewal: ${renewalDisplay}</span>
-          </div>
-        </div>
-        <div style="text-align:right">
-          <div class="account-big-score" style="color:${getScoreColor(computedScore)}" data-animate-score="${computedScore}">${computedScore}</div>
-          <div style="font-size:11px;color:var(--text-muted)">${deltaStr} vs last quarter ${sourceIcon('healthModel')}</div>
-        </div>
-      </div>
-    </div>
+    <div class="view-header"><div class="account-header-row"><div><h1>${a.name}</h1><div class="account-header-badges"><span class="badge badge-blue">${a.segment}</span><span class="badge badge-purple">${a.tier}</span><span style="color:var(--text-muted);font-size:12px">ARR: <strong style="color:var(--text-primary)">${a.arr}</strong></span><span style="color:var(--text-muted);font-size:12px">Contract: ${a.contractEnd}</span><span style="color:var(--text-muted);font-size:12px">Renewal: ${renewalDisplay}</span></div></div><div style="text-align:right"><div class="account-big-score" style="color:${getScoreColor(cs)}" data-animate-score="${cs}">${cs}</div><div style="font-size:11px;color:var(--text-muted)">${d>=0?'+'+d:d} vs last quarter ${sourceIcon('healthModel')}</div></div></div></div>
+    <div class="tab-bar">${tabs.map((t,i) => `<button class="tab-btn ${currentTab===i?'active':''}" onclick="currentTab=${i};destroyCharts();document.getElementById('main-content').innerHTML=renderAccountDetail();requestAnimationFrame(()=>initAccountCharts());animateScores();">${t}</button>`).join('')}</div>
+    <div id="tab-content">${currentTab===0 ? renderHealthTab(a) : currentTab===1 ? renderModuleTab(a) : renderExpansionTab(a)}</div>
+    ${sourcesPanel()}${FOOTER}`;
+}
 
-    <div class="tab-bar">
-      ${tabs.map((t, i) => `<button class="tab-btn ${currentTab === i ? 'active' : ''}" onclick="currentTab=${i};destroyCharts();document.getElementById('main-content').innerHTML=renderAccountDetail();requestAnimationFrame(()=>initAccountCharts());animateScores();">${t}</button>`).join('')}
-    </div>
+function renderHealthTableInner(a) {
+  const dims = Object.entries(a.healthDimensions);
+  const benchmark = 75;
+  let totalWeighted = 0;
+  dims.forEach(([,d]) => totalWeighted += (d.score * d.weight) / 100);
+  totalWeighted = Math.round(totalWeighted);
+  const anyBelow40 = dims.some(([,d]) => d.score < 40);
 
-    <div id="tab-content">
-      ${currentTab === 0 ? renderHealthTab(a) : currentTab === 1 ? renderModuleTab(a) : renderExpansionTab(a)}
-    </div>
-
-    ${sourcesPanel()}
-    <div class="page-footer">Built by Harsh Vardhan · CSM Portfolio · HyperVerge BFSI Vertical · Data is illustrative</div>
-  `;
+  let html = '<table class="data-table"><thead><tr><th>Dimension</th><th>Weight</th><th>Score</th><th>Weighted</th><th>Status</th></tr></thead><tbody>';
+  dims.forEach(([name, d]) => {
+    const w = Math.round(d.score * d.weight / 100);
+    const key = `${currentAccountId}-${name}`;
+    const isOpen = expandedDims[key];
+    html += `<tr class="dim-row" onclick="toggleDim('${key}')"><td><span class="dim-toggle ${isOpen?'open':''}">▸</span>${name}</td><td>${d.weight}%</td><td><span style="color:${getScoreColor(d.score)};font-weight:600">${d.score}</span></td><td>${w}</td><td>${dimStatus(d.score)}</td></tr>`;
+    if (isOpen && d.metrics) {
+      d.metrics.forEach(m => {
+        html += `<tr class="metric-row"><td>${m.name}</td><td></td><td style="color:${getScoreColor(m.score)};font-weight:500">${m.score}</td><td style="color:var(--text-muted)">${m.value}</td><td>${metricStatus(m.score)}</td></tr>`;
+      });
+    }
+  });
+  html += `<tr class="total-row"><td style="color:var(--text-primary)">Overall Health Score</td><td>100%</td><td style="color:${getScoreColor(totalWeighted)};font-size:16px">${totalWeighted}</td><td></td><td><span class="badge ${getScoreBadgeClass(totalWeighted)}">${getScoreLabel(totalWeighted)}</span>${anyBelow40?' <span class="badge badge-red" style="margin-left:4px">⚠ Dimension &lt;40</span>':''}</td></tr>`;
+  html += '</tbody></table>';
+  return html;
 }
 
 function renderHealthTab(a) {
-  const dims = Object.entries(a.healthDimensions);
-  const benchmarkScore = 75;
-  let totalWeighted = 0;
-  dims.forEach(([, d]) => totalWeighted += (d.score * d.weight) / 100);
-  totalWeighted = Math.round(totalWeighted);
-
   return `
     <div class="health-grid">
       <div class="card" style="padding:0;overflow-x:auto">
-        <div style="padding:14px 16px 0;font-size:13px;font-weight:600;color:var(--text-primary)">Health Dimensions ${sourceIcon('healthModel')}</div>
-        <table class="data-table">
-          <thead>
-            <tr><th>Dimension</th><th>Weight</th><th>Score</th><th>Weighted</th><th>Benchmark</th><th>Status</th></tr>
-          </thead>
-          <tbody>
-            ${dims.map(([name, d]) => {
-              const weighted = Math.round(d.score * d.weight / 100);
-              const benchW = Math.round(benchmarkScore * d.weight / 100);
-              const icon = d.score >= benchmarkScore ? '<span style="color:var(--accent-green)">✓ Above</span>'
-                : d.score >= benchmarkScore - 10 ? '<span style="color:var(--accent-yellow)">⚠ Near</span>'
-                : '<span style="color:var(--accent-red)">✗ Below</span>';
-              return `<tr>
-                <td style="color:var(--text-primary);font-weight:500;text-transform:capitalize">${name}</td>
-                <td>${d.weight}%</td>
-                <td><span style="color:${getScoreColor(d.score)};font-weight:600">${d.score}</span></td>
-                <td>${weighted}</td>
-                <td>${benchW}</td>
-                <td>${icon}</td>
-              </tr>`;
-            }).join('')}
-            <tr style="border-top:2px solid var(--border);font-weight:600">
-              <td style="color:var(--text-primary)">Total</td>
-              <td>100%</td>
-              <td>—</td>
-              <td style="color:${getScoreColor(totalWeighted)};font-weight:700">${totalWeighted}</td>
-              <td>${benchmarkScore}</td>
-              <td><span class="badge ${getScoreBadgeClass(totalWeighted)}">${getScoreLabel(totalWeighted)}</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div>
-        <div class="card" style="margin-bottom:16px">
-          <div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:8px">Health Radar</div>
-          <div style="max-height:220px"><canvas id="chart-radar"></canvas></div>
-        </div>
-        <div class="card" style="padding:0">
-          <div style="padding:12px 16px 6px;font-size:12px;font-weight:600;color:var(--text-secondary)">Account Alerts</div>
-          <div class="alert-feed">
-            ${a.alerts.map(al => `
-              <div class="alert-item">
-                ${alertTypeBadge(al.type)}
-                <span class="alert-msg">${al.message}</span>
-                <span class="alert-time">${al.time}</span>
-              </div>
-            `).join('')}
+        <div style="padding:14px 16px 0;font-size:13px;font-weight:600;color:var(--text-primary)">Health Dimensions ${sourceIcon('healthModel')} <span style="font-weight:400;font-size:11px;color:var(--text-muted);margin-left:8px">Click a dimension to expand metrics</span></div>
+        <div id="health-table-container">${renderHealthTableInner(a)}</div>
+        <div style="padding:0 16px 16px">
+          <button class="methodology-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'">▸ How This Score Works</button>
+          <div class="methodology-box" style="display:none">
+            <strong>Scoring Methodology</strong><br>
+            Each dimension is scored from 2–4 <strong>observable metrics</strong> (API volumes, ticket counts, CSAT scores, etc.). Each metric is scored 0–100 against industry benchmarks. The dimension score is the average of its metric scores. The overall health score is the weighted sum of all dimensions.<br><br>
+            <strong>Weights:</strong> Product Usage 30% · Engagement 25% · Outcomes 20% · Support 15% · Commercial 10%<br>
+            <strong>Red flag:</strong> Any dimension below 40 triggers immediate account review regardless of composite score.<br>
+            <strong>Framework:</strong> Inspired by Gainsight scorecard methodology, ChurnZero health scoring, and Vitally composite models.
           </div>
         </div>
       </div>
-    </div>
-  `;
+      <div>
+        <div class="card" style="margin-bottom:16px"><div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:8px">Health Radar</div><div style="max-height:220px"><canvas id="chart-radar"></canvas></div></div>
+        <div class="card" style="padding:0"><div style="padding:12px 16px 6px;font-size:12px;font-weight:600;color:var(--text-secondary)">Account Alerts</div><div class="alert-feed">${a.alerts.map(al => `<div class="alert-item">${alertTypeBadge(al.type)}<span class="alert-msg">${al.message}</span><span class="alert-time">${al.time}</span></div>`).join('')}</div></div>
+      </div>
+    </div>`;
 }
 
 function renderModuleTab(a) {
   const mods = Object.entries(a.modules);
   return `
     <div style="font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:14px">HyperVerge Module Adoption · ${a.name} ${sourceIcon('benchmarks')}</div>
-    <div class="card" style="padding:0;overflow-x:auto;margin-bottom:24px">
-      <table class="data-table">
-        <thead>
-          <tr><th>Module</th><th>Adoption %</th><th>vs Benchmark</th><th>Monthly API Calls</th><th>Error Rate</th><th>Status</th></tr>
-        </thead>
-        <tbody>
-          ${mods.map(([name, m]) => {
-            const delta = m.adoptionPct - m.benchmark;
-            const deltaStr = delta >= 0 ? `<span style="color:var(--accent-green)">+${delta}pp ↑</span>` : `<span style="color:var(--accent-red)">${delta}pp ↓</span>`;
-            return `<tr>
-              <td style="color:var(--text-primary);font-weight:500">${name}</td>
-              <td><span class="adoption-cell" style="background:${adoptionCellColor(m.adoptionPct)}">${m.adoptionPct}%</span></td>
-              <td>${deltaStr}</td>
-              <td>${fmtNum(m.apiCallsMonthly)}</td>
-              <td><span style="color:${errorColor(m.errorRate)};font-weight:600">${m.errorRate}%</span></td>
-              <td>${moduleStatus(m.adoptionPct, m.benchmark)}</td>
-            </tr>`;
-          }).join('')}
-        </tbody>
-      </table>
-    </div>
-    <div class="card">
-      <div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:8px">Adoption vs Benchmark</div>
-      <div style="max-height:280px"><canvas id="chart-adoption-bar"></canvas></div>
-    </div>
-  `;
+    <div class="card" style="padding:0;overflow-x:auto;margin-bottom:24px"><table class="data-table"><thead><tr><th>Module</th><th>Adoption %</th><th>vs Benchmark</th><th>Monthly API Calls</th><th>Error Rate</th><th>Status</th></tr></thead><tbody>
+      ${mods.map(([n,m]) => { const d=m.adoptionPct-m.benchmark; return `<tr><td style="color:var(--text-primary);font-weight:500">${n}</td><td><span class="adoption-cell" style="background:${adoptionCellColor(m.adoptionPct)}">${m.adoptionPct}%</span></td><td>${d>=0?`<span style="color:var(--accent-green)">+${d}pp ↑</span>`:`<span style="color:var(--accent-red)">${d}pp ↓</span>`}</td><td>${fmtNum(m.apiCallsMonthly)}</td><td><span style="color:${errorColor(m.errorRate)};font-weight:600">${m.errorRate}%</span></td><td>${moduleStatus(m.adoptionPct,m.benchmark)}</td></tr>`; }).join('')}
+    </tbody></table></div>
+    <div class="card"><div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:8px">Adoption vs Benchmark</div><div style="max-height:280px"><canvas id="chart-adoption-bar"></canvas></div></div>`;
 }
 
 function renderExpansionTab(a) {
   const opps = a.expansionOpportunities || (a.qbr && a.qbr.expansionOpportunities) || [];
-  if (opps.length === 0) {
-    return '<div class="empty-state">No expansion opportunities flagged. Focus: account stabilization.</div>';
-  }
-  return `
-    <div style="font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:14px">Expansion Opportunities</div>
-    ${opps.map(o => `
-      <div class="card expansion-card">
-        <div style="flex:1">
-          <div class="exp-module">${o.module}</div>
-          <div class="exp-badges">
-            <span class="badge badge-green">${o.arr_potential} ARR potential</span>
-            <span class="badge ${o.confidence === 'High' ? 'badge-green' : 'badge-yellow'}">${o.confidence} confidence</span>
-          </div>
-          <div class="exp-rationale">${o.rationale}</div>
-        </div>
-        <button class="btn" style="flex-shrink:0;margin-top:4px">Log to CRM</button>
-      </div>
-    `).join('')}
-  `;
+  if (!opps.length) return '<div class="empty-state">No expansion opportunities flagged. Focus: account stabilization.</div>';
+  return `<div style="font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:14px">Expansion Opportunities</div>${opps.map(o => `<div class="card expansion-card"><div style="flex:1"><div class="exp-module">${o.module}</div><div class="exp-badges"><span class="badge badge-green">${o.arr_potential} ARR potential</span><span class="badge ${o.confidence==='High'?'badge-green':'badge-yellow'}">${o.confidence} confidence</span></div><div class="exp-rationale">${o.rationale}</div></div><button class="btn" style="flex-shrink:0;margin-top:4px">Log to CRM</button></div>`).join('')}`;
 }
 
 function initAccountCharts() {
   const a = ACCOUNTS.find(x => x.id === currentAccountId);
   if (!a) return;
-
   if (currentTab === 0) {
-    // Radar chart
     const dims = Object.entries(a.healthDimensions);
-    createChart('chart-radar', {
-      type: 'radar',
-      data: {
-        labels: dims.map(([k]) => k.charAt(0).toUpperCase() + k.slice(1)),
-        datasets: [
-          {
-            label: a.name,
-            data: dims.map(([, d]) => d.score),
-            backgroundColor: 'rgba(79,142,247,0.15)',
-            borderColor: '#4f8ef7',
-            pointBackgroundColor: '#4f8ef7',
-            pointRadius: 4,
-            borderWidth: 2
-          },
-          {
-            label: 'Benchmark (75)',
-            data: dims.map(() => 75),
-            backgroundColor: 'rgba(85,93,122,0.05)',
-            borderColor: '#555d7a',
-            borderDash: [4, 4],
-            pointRadius: 0,
-            borderWidth: 1
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          r: {
-            min: 0, max: 100,
-            ticks: { stepSize: 25, color: '#555d7a', backdropColor: 'transparent', font: { size: 10 } },
-            grid: { color: 'rgba(46,51,71,0.6)' },
-            angleLines: { color: 'rgba(46,51,71,0.6)' },
-            pointLabels: { color: '#8b91a8', font: { size: 11, family: 'Inter' } }
-          }
-        },
-        plugins: {
-          legend: { display: true, position: 'bottom', labels: { color: '#8b91a8', font: { size: 11 }, padding: 10 } }
-        }
-      }
-    });
+    createChart('chart-radar', { type:'radar', data:{ labels:dims.map(([k])=>k), datasets:[{ label:a.name, data:dims.map(([,d])=>d.score), backgroundColor:'rgba(79,142,247,0.15)', borderColor:'#4f8ef7', pointBackgroundColor:'#4f8ef7', pointRadius:4, borderWidth:2 },{ label:'Benchmark (75)', data:dims.map(()=>75), backgroundColor:'rgba(85,93,122,0.05)', borderColor:'#555d7a', borderDash:[4,4], pointRadius:0, borderWidth:1 }] }, options:{ responsive:true, maintainAspectRatio:false, scales:{ r:{ min:0,max:100, ticks:{stepSize:25,color:'#555d7a',backdropColor:'transparent',font:{size:10}}, grid:{color:'rgba(46,51,71,0.6)'}, angleLines:{color:'rgba(46,51,71,0.6)'}, pointLabels:{color:'#8b91a8',font:{size:11,family:'Inter'}} }}, plugins:{ legend:{display:true,position:'bottom',labels:{color:'#8b91a8',font:{size:11},padding:10}} }}});
   }
-
   if (currentTab === 1) {
-    // Adoption bar chart with benchmark overlay
     const mods = Object.entries(a.modules);
-    createChart('chart-adoption-bar', {
-      type: 'bar',
-      data: {
-        labels: mods.map(([name]) => name),
-        datasets: [
-          {
-            label: 'Adoption %',
-            data: mods.map(([, m]) => m.adoptionPct),
-            backgroundColor: mods.map(([, m]) => m.adoptionPct >= m.benchmark ? '#2ecc8a' : m.adoptionPct >= m.benchmark - 15 ? '#f5a623' : '#e05252'),
-            borderRadius: 4,
-            barThickness: 24
-          },
-          {
-            label: 'Benchmark',
-            data: mods.map(([, m]) => m.benchmark),
-            type: 'line',
-            borderColor: '#8b91a8',
-            borderDash: [5, 5],
-            pointBackgroundColor: '#8b91a8',
-            pointRadius: 3,
-            borderWidth: 1.5,
-            fill: false
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          y: { min: 0, max: 100, grid: { color: 'rgba(46,51,71,0.5)' }, ticks: { color: '#555d7a', font: { size: 10 } } },
-          x: { grid: { display: false }, ticks: { color: '#8b91a8', font: { size: 10, family: 'Inter' }, maxRotation: 30 } }
-        },
-        plugins: {
-          legend: { position: 'bottom', labels: { color: '#8b91a8', font: { size: 11 }, padding: 10 } }
-        }
-      }
-    });
+    createChart('chart-adoption-bar', { type:'bar', data:{ labels:mods.map(([n])=>n), datasets:[{ label:'Adoption %', data:mods.map(([,m])=>m.adoptionPct), backgroundColor:mods.map(([,m])=>m.adoptionPct>=m.benchmark?'#2ecc8a':m.adoptionPct>=m.benchmark-15?'#f5a623':'#e05252'), borderRadius:4, barThickness:24 },{ label:'Benchmark', data:mods.map(([,m])=>m.benchmark), type:'line', borderColor:'#8b91a8', borderDash:[5,5], pointBackgroundColor:'#8b91a8', pointRadius:3, borderWidth:1.5, fill:false }] }, options:{ responsive:true, maintainAspectRatio:false, scales:{ y:{min:0,max:100,grid:{color:'rgba(46,51,71,0.5)'},ticks:{color:'#555d7a',font:{size:10}}}, x:{grid:{display:false},ticks:{color:'#8b91a8',font:{size:10,family:'Inter'},maxRotation:30}} }, plugins:{ legend:{position:'bottom',labels:{color:'#8b91a8',font:{size:11},padding:10}} }}});
   }
 }
 
 /* ==============================================================
    VIEW 3: QBR BUILDER (SBI Cards)
    ============================================================== */
-let qbrEditMode = false;
-let qbrKpiOverrides = {};
+let qbrEditMode = false, qbrKpiOverrides = {};
 
 function renderQBR() {
   const a = ACCOUNTS.find(x => x.id === 'sbi-cards');
@@ -1611,151 +849,52 @@ function renderQBR() {
 
   return `
     <div class="view-header" style="display:flex;justify-content:space-between;align-items:flex-start">
-      <div>
-        <h1>QBR Snapshot — SBI Cards</h1>
-        <div class="subtitle">Period: ${qbr.period} · Generated: Jan 15, 2025<br>Executive Business Review · Prepared by Harsh Vardhan, CSM</div>
-      </div>
+      <div><h1>QBR Snapshot — SBI Cards</h1><div class="subtitle">Period: ${qbr.period} · Generated: Jan 15, 2025<br>Executive Business Review · Prepared by Harsh Ashok, CSM</div></div>
       <div style="display:flex;gap:12px;align-items:center">
-        <label class="edit-toggle">
-          <input type="checkbox" ${qbrEditMode ? 'checked' : ''} onchange="qbrEditMode=this.checked;destroyCharts();document.getElementById('main-content').innerHTML=renderQBR();requestAnimationFrame(initQBRCharts);animateScores();">
-          Edit Mode
-        </label>
+        <label class="edit-toggle"><input type="checkbox" ${qbrEditMode?'checked':''} onchange="qbrEditMode=this.checked;destroyCharts();document.getElementById('main-content').innerHTML=renderQBR();animateScores();">Edit Mode</label>
         <button class="btn btn-primary" onclick="window.print()">⎙ Print / Export</button>
       </div>
     </div>
-
-    <!-- Executive Summary -->
     <div class="qbr-section-title">Executive Summary</div>
     <div class="exec-summary">${qbr.executiveSummary} ${sourceIcon('sbiPartnership')}</div>
-
-    <!-- KPI Performance -->
     <div class="qbr-section-title">Key Metrics — Before vs After HyperVerge ${sourceIcon('conversion')}</div>
-    <div class="card" style="padding:0;overflow-x:auto;margin-bottom:24px">
-      <table class="data-table">
-        <thead>
-          <tr><th>Metric</th><th>Baseline (Pre-HV)</th><th>Current</th><th>Target</th><th>Status</th><th>Commentary</th></tr>
-        </thead>
-        <tbody>
-          ${qbr.kpis.map((k, i) => {
-            const beforeVal = qbrKpiOverrides[`before-${i}`] || k.before;
-            const afterVal = qbrKpiOverrides[`after-${i}`] || k.after;
-            const targetVal = qbrKpiOverrides[`target-${i}`] || k.target;
-            if (qbrEditMode) {
-              return `<tr>
-                <td style="color:var(--text-primary);font-weight:500">${k.metric}</td>
-                <td><input class="editable-cell editing" value="${beforeVal}" onchange="qbrKpiOverrides['before-${i}']=this.value"></td>
-                <td><input class="editable-cell editing" value="${afterVal}" onchange="qbrKpiOverrides['after-${i}']=this.value"></td>
-                <td><input class="editable-cell editing" value="${targetVal}" onchange="qbrKpiOverrides['target-${i}']=this.value"></td>
-                <td>${statusBadge(k.status)}</td>
-                <td style="font-size:12px;color:var(--text-muted);max-width:200px">${k.commentary}</td>
-              </tr>`;
-            }
-            return `<tr>
-              <td style="color:var(--text-primary);font-weight:500">${k.metric}</td>
-              <td>${beforeVal}</td>
-              <td style="font-weight:600;color:var(--text-primary)">${afterVal}</td>
-              <td>${targetVal}</td>
-              <td>${statusBadge(k.status)}</td>
-              <td style="font-size:12px;color:var(--text-muted);max-width:200px">${k.commentary}</td>
-            </tr>`;
-          }).join('')}
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Module Adoption Mini -->
+    <div class="card" style="padding:0;overflow-x:auto;margin-bottom:24px"><table class="data-table"><thead><tr><th>Metric</th><th>Baseline (Pre-HV)</th><th>Current</th><th>Target</th><th>Status</th><th>Commentary</th></tr></thead><tbody>
+      ${qbr.kpis.map((k,i) => {
+        const bv=qbrKpiOverrides[`b${i}`]||k.before, av=qbrKpiOverrides[`a${i}`]||k.after, tv=qbrKpiOverrides[`t${i}`]||k.target;
+        return qbrEditMode
+          ? `<tr><td style="color:var(--text-primary);font-weight:500">${k.metric}</td><td><input class="editable-cell editing" value="${bv}" onchange="qbrKpiOverrides['b${i}']=this.value"></td><td><input class="editable-cell editing" value="${av}" onchange="qbrKpiOverrides['a${i}']=this.value"></td><td><input class="editable-cell editing" value="${tv}" onchange="qbrKpiOverrides['t${i}']=this.value"></td><td>${statusBadge(k.status)}</td><td style="font-size:12px;color:var(--text-muted);max-width:200px">${k.commentary}</td></tr>`
+          : `<tr><td style="color:var(--text-primary);font-weight:500">${k.metric}</td><td>${bv}</td><td style="font-weight:600;color:var(--text-primary)">${av}</td><td>${tv}</td><td>${statusBadge(k.status)}</td><td style="font-size:12px;color:var(--text-muted);max-width:200px">${k.commentary}</td></tr>`;
+      }).join('')}
+    </tbody></table></div>
     <div class="qbr-section-title">Module Adoption Summary ${sourceIcon('benchmarks')}</div>
-    <div class="card" style="padding:0;overflow-x:auto;margin-bottom:24px">
-      <table class="data-table">
-        <thead>
-          <tr><th>Module</th><th>Adoption %</th><th>vs Benchmark</th><th>API Calls/mo</th><th>Error Rate</th><th>Status</th></tr>
-        </thead>
-        <tbody>
-          ${Object.entries(a.modules).map(([name, m]) => {
-            const delta = m.adoptionPct - m.benchmark;
-            const deltaStr = delta >= 0 ? `<span style="color:var(--accent-green)">+${delta}pp</span>` : `<span style="color:var(--accent-red)">${delta}pp</span>`;
-            return `<tr>
-              <td style="color:var(--text-primary);font-weight:500">${name}</td>
-              <td><span class="adoption-cell" style="background:${adoptionCellColor(m.adoptionPct)}">${m.adoptionPct}%</span></td>
-              <td>${deltaStr}</td>
-              <td>${fmtNum(m.apiCallsMonthly)}</td>
-              <td style="color:${errorColor(m.errorRate)}">${m.errorRate}%</td>
-              <td>${moduleStatus(m.adoptionPct, m.benchmark)}</td>
-            </tr>`;
-          }).join('')}
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Agreed Next Steps -->
+    <div class="card" style="padding:0;overflow-x:auto;margin-bottom:24px"><table class="data-table"><thead><tr><th>Module</th><th>Adoption %</th><th>vs Benchmark</th><th>API Calls/mo</th><th>Error Rate</th><th>Status</th></tr></thead><tbody>
+      ${Object.entries(a.modules).map(([n,m]) => { const d=m.adoptionPct-m.benchmark; return `<tr><td style="color:var(--text-primary);font-weight:500">${n}</td><td><span class="adoption-cell" style="background:${adoptionCellColor(m.adoptionPct)}">${m.adoptionPct}%</span></td><td>${d>=0?`<span style="color:var(--accent-green)">+${d}pp</span>`:`<span style="color:var(--accent-red)">${d}pp</span>`}</td><td>${fmtNum(m.apiCallsMonthly)}</td><td style="color:${errorColor(m.errorRate)}">${m.errorRate}%</td><td>${moduleStatus(m.adoptionPct,m.benchmark)}</td></tr>`; }).join('')}
+    </tbody></table></div>
     <div class="qbr-section-title">Agreed Next Steps</div>
-    <div class="card" style="padding:0;overflow-x:auto;margin-bottom:24px">
-      <table class="data-table">
-        <thead>
-          <tr><th>Action</th><th>Owner</th><th>Due Date</th><th>Status</th></tr>
-        </thead>
-        <tbody>
-          ${qbr.nextSteps.map(s => `
-            <tr>
-              <td style="color:var(--text-primary)">${s.action}</td>
-              <td>${s.owner}</td>
-              <td>${s.due}</td>
-              <td>${statusBadge(s.status)}</td>
-            </tr>
-          `).join('')}
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Expansion Pipeline -->
+    <div class="card" style="padding:0;overflow-x:auto;margin-bottom:24px"><table class="data-table"><thead><tr><th>Action</th><th>Owner</th><th>Due Date</th><th>Status</th></tr></thead><tbody>
+      ${qbr.nextSteps.map(s => `<tr><td style="color:var(--text-primary)">${s.action}</td><td>${s.owner}</td><td>${s.due}</td><td>${statusBadge(s.status)}</td></tr>`).join('')}
+    </tbody></table></div>
     <div class="qbr-section-title">Expansion Pipeline ${sourceIcon('aml')}</div>
-    ${qbr.expansionOpportunities.map(o => `
-      <div class="card expansion-card">
-        <div style="flex:1">
-          <div class="exp-module">${o.module}</div>
-          <div class="exp-badges">
-            <span class="badge badge-green">${o.arr_potential} ARR potential</span>
-            <span class="badge ${o.confidence === 'High' ? 'badge-green' : 'badge-yellow'}">${o.confidence} confidence</span>
-          </div>
-          <div class="exp-rationale">${o.rationale}</div>
-        </div>
-        <button class="btn" style="flex-shrink:0;margin-top:4px">Log to CRM</button>
-      </div>
-    `).join('')}
-
-    <!-- QBR-specific sources -->
+    ${qbr.expansionOpportunities.map(o => `<div class="card expansion-card"><div style="flex:1"><div class="exp-module">${o.module}</div><div class="exp-badges"><span class="badge badge-green">${o.arr_potential} ARR potential</span><span class="badge ${o.confidence==='High'?'badge-green':'badge-yellow'}">${o.confidence} confidence</span></div><div class="exp-rationale">${o.rationale}</div></div><button class="btn" style="flex-shrink:0;margin-top:4px">Log to CRM</button></div>`).join('')}
     <div class="qbr-section-title" style="margin-top:36px">Data Sources &amp; Assumptions</div>
     <div class="card" style="font-size:11px;color:var(--text-muted);line-height:1.8">
       <ul style="margin-left:16px">
         <li><strong>eKYC Completion & Onboarding Time:</strong> Inspired by SBI × HyperVerge partnership reporting 25min→5min reduction and 10x agent productivity. <a href="https://affairscloud.com/sbi-tie-up-with-hyperverge-for-onboarding-customer-online-under-covid-19/" target="_blank">AffairsCloud</a>, <a href="https://timesofindia.indiatimes.com/state-bank-of-india-and-hyperverge-ramp-up-technology-for-online-customer-onboarding-amidst-covid-19-economic-recovery/articleshow/82792933.cms" target="_blank">Times of India</a></li>
-        <li><strong>Pass-through Rate (95%):</strong> HyperVerge's published claim for digital KYC journeys. <a href="https://hyperverge.co/solutions/digitial-identity-verification-kyc/" target="_blank">HyperVerge</a></li>
-        <li><strong>Video KYC Drop-off & V-CIP:</strong> RBI V-CIP guidelines context + HyperVerge's video KYC product positioning. <a href="https://hyperverge.co/blog/what-is-video-kyc/" target="_blank">HyperVerge</a></li>
-        <li><strong>NIST FRVT Rankings:</strong> HyperVerge top-10 globally in FRVT 1:1 and 1:N. <a href="https://www.businesswireindia.com/hyperverge-tops-the-nist-rankings-in-both-frvt-11-and-1n-categories-79018.html" target="_blank">BusinessWire India</a></li>
-        <li><strong>AI Accuracy (99.5%+):</strong> Per HyperVerge's published platform capabilities across 1B+ identities. <a href="https://hyperverge.co/in/" target="_blank">HyperVerge</a></li>
-        <li><strong>AML Screening:</strong> HyperVerge ONE's end-to-end AML/PEP screening module. <a href="https://hyperverge.co/in/industries/bank-customer-onboarding/" target="_blank">HyperVerge</a></li>
-        <li><strong>Liveness Detection:</strong> iBeta-certified passive liveness. <a href="https://hyperverge.co/in/integrations-marketplace/face-match-api/" target="_blank">HyperVerge</a></li>
-        <li><strong>Health Scores & ARR:</strong> Illustrative. Health model based on industry-standard CSM frameworks (Gainsight, Vitally). ARR figures reflect typical BFSI SaaS deal sizes, not actual contracts.</li>
+        <li><strong>Pass-through Rate (95%):</strong> HyperVerge's published claim. <a href="https://hyperverge.co/solutions/digitial-identity-verification-kyc/" target="_blank">HyperVerge</a></li>
+        <li><strong>Video KYC & V-CIP:</strong> RBI V-CIP guidelines + HyperVerge positioning. <a href="https://hyperverge.co/blog/what-is-video-kyc/" target="_blank">HyperVerge</a></li>
+        <li><strong>NIST FRVT Rankings:</strong> Top-10 globally in FRVT 1:1 and 1:N. <a href="https://www.businesswireindia.com/hyperverge-tops-the-nist-rankings-in-both-frvt-11-and-1n-categories-79018.html" target="_blank">BusinessWire India</a></li>
+        <li><strong>AI Accuracy (99.5%+):</strong> Per HyperVerge across 1B+ identities. <a href="https://hyperverge.co/in/" target="_blank">HyperVerge</a></li>
+        <li><strong>Health Scores & ARR:</strong> Illustrative. Health model based on Gainsight, ChurnZero, Vitally best practices. ARR reflects typical BFSI SaaS deal sizes.</li>
       </ul>
-      <div style="margin-top:12px;padding:8px 12px;background:rgba(245,166,35,0.06);border-left:3px solid var(--accent-yellow);border-radius:0 4px 4px 0">
-        <strong>Disclaimer:</strong> This QBR is a speculative artifact built from public information to demonstrate how a CSM would structure executive business reviews for HyperVerge's BFSI vertical. No proprietary or confidential data has been used.
-      </div>
+      <div style="margin-top:12px;padding:8px 12px;background:rgba(245,166,35,0.06);border-left:3px solid var(--accent-yellow);border-radius:0 4px 4px 0"><strong>Disclaimer:</strong> This QBR is a speculative artifact built from public information to demonstrate how a CSM would structure executive business reviews for HyperVerge's BFSI vertical. No proprietary or confidential data has been used.</div>
     </div>
-
-    ${sourcesPanel()}
-    <div class="page-footer">Built by Harsh Vardhan · CSM Portfolio · HyperVerge BFSI Vertical · Data is illustrative</div>
-  `;
-}
-
-function initQBRCharts() {
-  // No charts in QBR view currently — data is tabular
+    ${sourcesPanel()}${FOOTER}`;
 }
 
 /* ==============================================================
    INIT
    ============================================================== */
-updateSidebar();
-renderMainContent();
-animateScores();
+updateSidebar(); renderMainContent(); animateScores();
 </script>
 </body>
 </html>
